@@ -83,3 +83,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYTJmYTU1Y
 ### Get image
 GET {{Bloggy_Api_HostAddress}}/images/user_image_0a2fa55c-4ded-4911-8b5b-3b42180c1b33.png
 Accept: application/json
+
+### Get all topics
+GET {{Bloggy_Api_HostAddress}}/api/v1/topics/
+Accept: application/json
