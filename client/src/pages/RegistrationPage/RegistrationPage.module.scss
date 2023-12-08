@@ -1,0 +1,36 @@
+.registration {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+    &__inner {
+        min-height: 100%;
+    }
+
+    &__title {
+        max-width: 600px;
+        width: 100%;
+        font-size: 32px;
+        font-weight: 700;
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 30px;
+    }
+
+    &__small_text {
+        margin-top: 20px;
+        font-size: 13px;
+        font-weight: 400;
+        text-align: center;
+        color: #fff;
+    }
+
+    &__link {
+        font-size: 14px;
+        font-weight: 500;
+        color: #3a86ff;
+    }
+}

@@ -1,0 +1,58 @@
+.header {
+    background: #171717;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(#fff, .1);
+
+    &__inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__logo {
+        max-width: 55px;
+        max-height: 55px;
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+    }
+
+    &__user_img {
+        max-width: 35px;
+        max-height: 35px;
+        border-radius: 100%;
+        height: auto;
+        width: 100%;
+
+    }
+
+    &__user_box {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        align-items: center;
+    }
+
+    &__user_name {
+        font-size: 14px;
+        font-weight: 400;
+        color: #fff;
+    }
+
+    &__auth_btn {
+        font-size: 16px;
+        font-weight: 500;
+        color: #ed7926;
+        padding: 10px 30px;
+        border: 1px solid #ed7926;
+        background: #1d1e1e;
+        border-radius: 50px;
+        transition: background .3s, color .3s;
+
+        &:hover {
+            background: #dc6d26;
+            border-color: #dc6d26;
+            color: #fff;
+        }
+    }
+}
