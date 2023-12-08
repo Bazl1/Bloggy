@@ -1,6 +1,6 @@
 export interface IUser {
     username: string,
     email: string;
-    icon: undefined | string,
+    imageUri: undefined | string,
     id: string;
 }
