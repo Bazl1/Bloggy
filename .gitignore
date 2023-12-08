@@ -1,4 +1,8 @@
 bin
+<<<<<<< HEAD
 obj
 .vscode
 wwwroot/images
+=======
+obj
+>>>>>>> Bazl1
