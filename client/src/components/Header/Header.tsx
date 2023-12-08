@@ -23,7 +23,7 @@ const Header = () => {
                                         <img className={s.header__user_img} src={user} alt="user" />
                                         : <img className={s.header__user_img} src={store.user.imageUri} alt="user" />} */}
                                 </div>
-                                <div className={s.header__user_name}>Welcome ~ {store.user.username}</div>
+                                {/* <div className={s.header__user_name}>Welcome ~ {store.user.name}</div> */}
                             </div>
                             :
                             <Link to={'/login'} className={s.header__auth_btn}>Login</Link>
