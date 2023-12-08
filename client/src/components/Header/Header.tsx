@@ -19,9 +19,10 @@ const Header = () => {
                         store.isAuth ?
                             <div className={s.header__user_box}>
                                 <div className={s.header__user_avatar}>
-                                    {typeof store.user.imageUri === 'string' && store.user.imageUri !== '' ?
+                                    {store && store.user && store.user.imageUri ?
                                         <img className={s.header__user_img} src={store.user.imageUri} alt="user" />
                                         : <img className={s.header__user_img} src={user} alt="user" />}
+
                                 </div>
                                 <div className={s.header__user_name}>Welcome ~ {store.user.name}</div>
                             </div>
