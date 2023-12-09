@@ -12,11 +12,11 @@ public class JwtTokenGenerator(
     IOptions<JwtSettings> _jwtSettings
 ) : IJwtTokenGenerator
 {
-    public string GenerateToken(User user)
+    public string GenerateAccessToken(User user)
     {
         var signingCredentials = new SigningCredentials(
             new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(_jwtSettings.Value.Secret)
+                Encoding.UTF8.GetBytes(_jwtSettings.Value.AccessSecret)
             ),
             SecurityAlgorithms.HmacSha256
         );
@@ -32,7 +32,35 @@ public class JwtTokenGenerator(
             issuer: _jwtSettings.Value.Issuer,
             audience: _jwtSettings.Value.Audience,
             claims: claims,
-            expires: DateTime.UtcNow.AddMinutes(1), // DateTime.UtcNow.AddMinutes(_jwtSettings.Value.ExpiryMinutes),
+            expires: DateTime.UtcNow.AddMinutes(_jwtSettings.Value.AccessExpiryMinutes),
+            signingCredentials: signingCredentials
+        );
+
+        return new JwtSecurityTokenHandler()
+            .WriteToken(token);
+    }
+
+    public string GenerateRefreshToken(User user)
+    {
+        var signingCredentials = new SigningCredentials(
+            new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(_jwtSettings.Value.RefreshSecret)
+            ),
+            SecurityAlgorithms.HmacSha256
+        );
+
+        Claim[] claims = [
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new Claim(JwtRegisteredClaimNames.Name, user.Name),
+            new Claim(JwtRegisteredClaimNames.Email, user.Email),
+            new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+        ];
+
+        var token = new JwtSecurityToken(
+            issuer: _jwtSettings.Value.Issuer,
+            audience: _jwtSettings.Value.Audience,
+            claims: claims,
+            expires: DateTime.UtcNow.AddMinutes(_jwtSettings.Value.RefreshExpiryMinutes),
             signingCredentials: signingCredentials
         );
 

@@ -11,7 +11,6 @@ public class RegisterHandler(
     IUserRepository _userRepository,
     IRefreshTokenRepository _refreshTokenRepository,
     IJwtTokenGenerator _jwtTokenGenerator,
-    IRefreshTokenGenerator _refreshTokenGenerator,
     IPasswordHasher _passwordHasher,
     IHttpContextAccessor _httpContextAccessor
 ) : IRequestHandler<RegisterRequest, RegisterResponse>
@@ -41,9 +40,9 @@ public class RegisterHandler(
         var refreshToken = new RefreshToken
         {
             UserId = user.Id,
-            Value = _refreshTokenGenerator.GenerateRefreshToken(),
             Created = DateTime.UtcNow,
-            Expiry = DateTime.UtcNow.AddMinutes(2)
+            Expiry = DateTime.UtcNow.AddMinutes(60),
+            Value = _jwtTokenGenerator.GenerateRefreshToken(user),
         };
         _refreshTokenRepository.Add(refreshToken);
 
@@ -51,12 +50,11 @@ public class RegisterHandler(
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
-            Expires = refreshToken.Expiry
         };
         _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value, cookieOptions);
 
         // Create access token
-        var accessToken = _jwtTokenGenerator.GenerateToken(user);
+        var accessToken = _jwtTokenGenerator.GenerateAccessToken(user);
 
         return Task.FromResult(
             new RegisterResponse(
