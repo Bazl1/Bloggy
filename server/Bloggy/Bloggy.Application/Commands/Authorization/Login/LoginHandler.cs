@@ -13,6 +13,7 @@ public class LoginHandler(
     IRefreshTokenRepository _refreshTokenRepository,
     IPasswordHasher _passwordHasher,
     IJwtTokenGenerator _jwtTokenGenerator,
+    IRefreshTokenGenerator _refreshTokenGenerator,
     IHttpContextAccessor _httpContextAccessor
 ) : IRequestHandler<LoginRequest, LoginResponse>
 {
@@ -28,20 +29,29 @@ public class LoginHandler(
             throw new ApplicatioException("Password mismatch");
         }
 
+        var refreshToken = _refreshTokenRepository.GetByUserId(user.Id);
+
+        // Create refresh token
+        refreshToken.Value = _refreshTokenGenerator.GenerateRefreshToken();
+        refreshToken.Created = DateTime.UtcNow;
+        refreshToken.Expiry = DateTime.UtcNow.AddMinutes(2);
+
+        // Update user refresh token
+        _refreshTokenRepository.Update(refreshToken);
+
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Expires = refreshToken.Expiry
+        };
+        _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value, cookieOptions);
+
         var accessToken = _jwtTokenGenerator.GenerateToken(user);
-        var refreshToken = _jwtTokenGenerator.GenerateToken(user);
-
-        var userRefreshToken = _refreshTokenRepository.GetByUserId(user.Id);
-        userRefreshToken.Value = refreshToken;
-        userRefreshToken.ExpiryDate = DateTime.UtcNow.AddDays(1);
-        _refreshTokenRepository.Update(userRefreshToken);
-
-        _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", userRefreshToken.Value);
 
         return Task.FromResult(
             new LoginResponse(
                 AccessToken: accessToken,
-                RefreshToken: refreshToken,
+                RefreshToken: refreshToken.Value,
                 User: new UserDto
                 {
                     Id = user.Id.ToString(),
