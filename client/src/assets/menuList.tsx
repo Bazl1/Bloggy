@@ -1,5 +1,7 @@
 import { ReactElement } from "react";
 import { MdHome } from "react-icons/md";
+import { IoLogOutSharp } from "react-icons/io5";
+import { MdAccountCircle } from "react-icons/md";
 
 interface IListItem {
     path: string,
@@ -17,6 +19,21 @@ const menuList: MenuList = {
             path: '/',
             name: 'Home',
             icon: <MdHome />
+        }
+    ]
+};
+
+export const menuAuthList: MenuList = {
+    listItem: [
+        {
+            path: '/account',
+            name: 'Account',
+            icon: <MdAccountCircle />
+        },
+        {
+            path: '/logout',
+            name: 'Logout',
+            icon: <IoLogOutSharp />
         }
     ]
 };
