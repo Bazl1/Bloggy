@@ -7,12 +7,21 @@ import Sidebar from './components/Sidebar/Sidebar';
 import Header from './components/Header/Header';
 import { observer } from 'mobx-react-lite'
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
+import { FC, useContext, useEffect } from 'react';
+import { Context } from './main';
 
-function App() {
+const App: FC = () => {
+  const { store } = useContext(Context)
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      store.checkAuth()
+    }
+  }, [])
 
   return (
     <>
-      <Router> 
+      <Router>
         <ScrollToTop />
         <Header />
 
