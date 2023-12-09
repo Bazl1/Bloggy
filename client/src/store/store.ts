@@ -23,10 +23,10 @@ export default class Store {
         try {
             const response = await AuthService.login(email, password);
             console.log(response); // Delete this
+            console.log(response.data.user); // Delete this
             localStorage.setItem('token', response.data.accessToken);
             this.setAuth(true);
             this.setUser(response.data.user);
-            console.log(response.data.user); // Delete this
         } catch (error) {
             console.log(error);
         }
