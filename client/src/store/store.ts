@@ -1,9 +1,10 @@
 import { IUser } from "../models/IUser";
 import { makeAutoObservable } from 'mobx'
 import AuthService from "../service/UserServer";
-
+import { redirect } from "react-router-dom";
 
 export default class Store {
+
     user = {} as IUser;
     isAuth = false;
 
@@ -26,6 +27,7 @@ export default class Store {
             localStorage.setItem('token', response.data.result.accessToken);
             this.setAuth(true);
             this.setUser(response.data.result.user);
+            redirect("/");
         } catch (error) {
             console.log(error);
         }
@@ -38,6 +40,7 @@ export default class Store {
             localStorage.setItem('token', response.data.result.accessToken);
             this.setAuth(true);
             this.setUser(response.data.result.user);
+            redirect("/");
         } catch (error) {
             console.log(error);
         }
