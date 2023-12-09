@@ -25,5 +25,5 @@ public class OAuthController(
     public IActionResult Logout() => Ok(_mediator.Send(new LogoutRequest()));
     
     [HttpPost("refresh")]
-    public IActionResult Refresh([FromBody] RefreshRequest request) => Ok(_mediator.Send(request));
+    public IActionResult Refresh() => Ok(_mediator.Send(new RefreshRequest()));
 }

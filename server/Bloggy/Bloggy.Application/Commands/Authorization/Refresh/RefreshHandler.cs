@@ -4,18 +4,20 @@ using Bloggy.Application.Persistense;
 using Bloggy.Application.Services.Authorization;
 using Bloggy.Domain.Entites;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace Bloggy.Application.Commands.Authorization.Refresh;
 
 public class RefreshHandler(
     IRefreshTokenRepository _refreshTokenRepository,
     IUserRepository _userRepository,
-    IJwtTokenGenerator _jwtTokenGenerator
+    IJwtTokenGenerator _jwtTokenGenerator,
+    IHttpContextAccessor _httpContextAccessor
 ) : IRequestHandler<RefreshRequest, RefreshResponse>
 {
     public Task<RefreshResponse> Handle(RefreshRequest request, CancellationToken cancellationToken)
     {
-        if (_refreshTokenRepository.GetByValue(request.RefreshToken) is not RefreshToken refreshToken)
+        if (_refreshTokenRepository.GetByValue(_httpContextAccessor.HttpContext.Request.Cookies["refreshToken"]) is not RefreshToken refreshToken)
         {
             throw new ApplicatioException("Refresh token not found");
         }
