@@ -31,6 +31,9 @@ public class RefreshHandler(
         
         refreshToken.Value = _jwtTokenGenerator.GenerateToken(user);
         refreshToken.ExpiryDate = DateTime.UtcNow.AddDays(1);
+
+        _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value);
+
         _refreshTokenRepository.Update(refreshToken);
 
         return Task.FromResult(
