@@ -4,7 +4,11 @@ import { Context } from '../../main';
 
 const PrivateRoute = () => {
     const { store } = useContext(Context)
-    return store.isAuth ? <Outlet /> : <Navigate to="/login" />;
+    if (!store.isAuth) {
+        return <Navigate to="/login" />;
+    }
+
+    return <Outlet />;
 }
 
 export default PrivateRoute
