@@ -18,7 +18,10 @@ public class RefreshHandler(
 {
     public Task<RefreshResponse> Handle(RefreshRequest request, CancellationToken cancellationToken)
     {
-        if (_refreshTokenRepository.GetByValue(_httpContextAccessor.HttpContext.Request.Cookies["refreshToken"]) is not RefreshToken refreshToken)
+        string refreshTokenValue = _httpContextAccessor.HttpContext.Request.Cookies["refreshToken"];
+        var refreshToken = _refreshTokenRepository.GetByValue(refreshTokenValue);
+
+        if (refreshToken == null) //  is not RefreshToken refreshToken
         {
             throw new ApplicatioException("Invalid refresh token");
         }
@@ -42,6 +45,7 @@ public class RefreshHandler(
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
+            Expires = refreshToken.Expiry,
         };
         _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value, cookieOptions);
         
