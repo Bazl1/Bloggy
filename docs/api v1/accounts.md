@@ -129,3 +129,29 @@ PUT {host}/api/v1/accounts/my/images
 ```js
 OK 200
 ```
+
+## Get all topics
+Requires authorization: __no__
+
+### Request Sample
+
+```js
+GET {host}/api/v1/topics/
+```
+
+### Success Response Sample
+
+```js
+OK 200
+```
+
+```json
+{
+    topics: [
+        {
+            "id": 0,
+            "name": "topic_name"
+        }
+    ]
+}
+```

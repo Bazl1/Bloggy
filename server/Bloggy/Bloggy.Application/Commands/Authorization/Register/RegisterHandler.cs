@@ -48,12 +48,13 @@ public class RegisterHandler(
             new RegisterResponse(
                 AccessToken: accessToken,
                 RefreshToken: refreshToken,
-                User: new UserDto(
-                    Id: user.Id.ToString(),
-                    ImageUri: user.ImageUri,
-                    Name: user.Name,
-                    Email: user.Email
-                )
+                User: new UserDto
+                {
+                    Id = user.Id.ToString(),
+                    ImageUri = user.ImageUri,
+                    Name = user.Name,
+                    Email = user.Email
+                }
             )
         );
     }
