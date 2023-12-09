@@ -15,7 +15,6 @@ const Header = () => {
             <div className="container-fluid">
                 <div className={s.header__inner}>
                     <NavLink to={'/'}><img className={s.header__logo} src={logo} alt="logo" /></NavLink>
-                    <button onClick={() => console.log(store.user)}>give user</button>
                     {store.isAuth ? (
                         <div className={s.header__user_box}>
                             <div className={s.header__user_avatar}>
