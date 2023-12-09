@@ -2,13 +2,19 @@ import s from './FormLogin.module.scss'
 import { useState, useContext } from 'react'
 import { observer } from 'mobx-react-lite'
 import { Context } from '../../main'
+import { useNavigate } from 'react-router-dom'
 
 
 const Form = () => {
+    const navigate = useNavigate();
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
     const { store } = useContext(Context)
+
+    store.setRedirectCallback((path: string) => {
+        navigate(path);
+    });
 
     return (
         <div className={s.form}>

@@ -1,12 +1,11 @@
 import { IUser } from "../models/IUser";
 import { makeAutoObservable } from 'mobx'
 import AuthService from "../service/UserServer";
-import { redirect } from "react-router-dom";
 
 export default class Store {
-
     user = {} as IUser;
     isAuth = false;
+    redirectCallback: Function | null = null;
 
     constructor() {
         makeAutoObservable(this);
@@ -20,6 +19,10 @@ export default class Store {
         this.user = user;
     }
 
+    setRedirectCallback(callback: Function) {
+        this.redirectCallback = callback;
+    }
+
     async login(email: string, password: string) {
         try {
             const response = await AuthService.login(email, password);
@@ -27,7 +30,9 @@ export default class Store {
             localStorage.setItem('token', response.data.result.accessToken);
             this.setAuth(true);
             this.setUser(response.data.result.user);
-            redirect("/");
+            if (this.redirectCallback) {
+                this.redirectCallback('/');
+            }
         } catch (error) {
             console.log(error);
         }
@@ -40,7 +45,9 @@ export default class Store {
             localStorage.setItem('token', response.data.result.accessToken);
             this.setAuth(true);
             this.setUser(response.data.result.user);
-            redirect("/");
+            if (this.redirectCallback) {
+                this.redirectCallback('/');
+            }
         } catch (error) {
             console.log(error);
         }

@@ -1,4 +1,8 @@
 .sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     padding: 50px 20px;
     border-right: 1px solid rgba(#fff, .1);
 
@@ -36,6 +40,11 @@
         color: #E6E6E6;
 
         transition: color .3s;
+
+        span {
+            display: flex;
+            align-items: center;
+        }
 
         &:hover {
             color: #dc6d26;

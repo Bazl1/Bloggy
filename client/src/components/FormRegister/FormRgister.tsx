@@ -2,13 +2,20 @@ import { observer } from 'mobx-react-lite'
 import s from './FormRgister.module.scss'
 import { useContext, useState } from 'react'
 import { Context } from '../../main'
+import { useNavigate } from 'react-router-dom'
 
 const FormRgister = () => {
+    const navigate = useNavigate();
     const [username, setUsername] = useState<string>('')
     const [email, setEmail] = useState<string>('')
     const [password, setPassword] = useState<string>('')
 
     const { store } = useContext(Context)
+
+
+    store.setRedirectCallback((path: string) => {
+        navigate(path);
+    });
 
     return (
         <div className={s.form}>

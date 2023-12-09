@@ -1,8 +1,12 @@
 import { NavLink } from "react-router-dom";
-import menuList from '../../assets/menuList';
+import menuList, { menuAuthList } from '../../assets/menuList';
 import s from './Sidebar.module.scss'
+import { observer } from "mobx-react-lite";
+import { useContext } from "react";
+import { Context } from "../../main";
 
 const Sidebar = ({ children }: any) => {
+    const { store } = useContext(Context)
 
     return (
         <div className={s.sidebar_container}>
@@ -18,6 +22,20 @@ const Sidebar = ({ children }: any) => {
                         })}
                     </ul>
                 </nav>
+                {store.isAuth ?
+                    <div className="sidebar__authmenu">
+                        <ul className={s.sidebar__list}>
+                            {menuAuthList.listItem.map((item: any, index: number) => {
+                                return (
+                                    <li key={index} className={s.sidebar__item}>
+                                        <NavLink to={item.path} className={s.sidebar__item_link}><span className={s.sidebar__icon}>{item.icon}</span>{item.name}</NavLink>
+                                    </li>
+                                )
+                            })}
+                        </ul>
+                    </div>
+                    : ''
+                }
             </div>
             <div className="wrapper">
                 <main className="main">
@@ -28,4 +46,4 @@ const Sidebar = ({ children }: any) => {
     )
 }
 
-export default Sidebar
+export default observer(Sidebar)
