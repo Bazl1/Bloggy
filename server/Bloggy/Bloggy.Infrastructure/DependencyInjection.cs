@@ -18,6 +18,7 @@ public static class DependencyInjection
         services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
 
         services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
+        services.AddTransient<IRefreshTokenGenerator, RefreshTokenGenerator>();
         services.AddTransient<IPasswordHasher, PasswordHasher>();
 
         services.AddTransient<IUserRepository, UserRepository>();

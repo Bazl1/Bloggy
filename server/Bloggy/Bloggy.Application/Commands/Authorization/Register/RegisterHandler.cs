@@ -11,6 +11,7 @@ public class RegisterHandler(
     IUserRepository _userRepository,
     IRefreshTokenRepository _refreshTokenRepository,
     IJwtTokenGenerator _jwtTokenGenerator,
+    IRefreshTokenGenerator _refreshTokenGenerator,
     IPasswordHasher _passwordHasher,
     IHttpContextAccessor _httpContextAccessor
 ) : IRequestHandler<RegisterRequest, RegisterResponse>
@@ -27,6 +28,7 @@ public class RegisterHandler(
             throw new ApplicationException("User with given email already exists");
         }
 
+        // Create user
         var user = new User
         {
             Name = request.Username,
@@ -35,23 +37,31 @@ public class RegisterHandler(
         };
         _userRepository.Add(user);
 
-        var accessToken = _jwtTokenGenerator.GenerateToken(user);
-        var refreshToken = _jwtTokenGenerator.GenerateToken(user);
-        
-        var userRefreshToken = new RefreshToken
+        // Create refresh token
+        var refreshToken = new RefreshToken
         {
             UserId = user.Id,
-            Value = refreshToken,
-            ExpiryDate = DateTime.UtcNow.AddDays(1)
+            Value = _refreshTokenGenerator.GenerateRefreshToken(),
+            Created = DateTime.UtcNow,
+            Expiry = DateTime.UtcNow.AddMinutes(2)
         };
-        _refreshTokenRepository.Add(userRefreshToken);
+        _refreshTokenRepository.Add(refreshToken);
 
-        _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", userRefreshToken.Value);
+        // Set refresh token to cookie
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Expires = refreshToken.Expiry
+        };
+        _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value, cookieOptions);
+
+        // Create access token
+        var accessToken = _jwtTokenGenerator.GenerateToken(user);
 
         return Task.FromResult(
             new RegisterResponse(
                 AccessToken: accessToken,
-                RefreshToken: refreshToken,
+                RefreshToken: refreshToken.Value,
                 User: new UserDto
                 {
                     Id = user.Id.ToString(),

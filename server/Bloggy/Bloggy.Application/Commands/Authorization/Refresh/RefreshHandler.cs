@@ -12,6 +12,7 @@ public class RefreshHandler(
     IRefreshTokenRepository _refreshTokenRepository,
     IUserRepository _userRepository,
     IJwtTokenGenerator _jwtTokenGenerator,
+    IRefreshTokenGenerator _refreshTokenGenerator,
     IHttpContextAccessor _httpContextAccessor
 ) : IRequestHandler<RefreshRequest, RefreshResponse>
 {
@@ -21,20 +22,31 @@ public class RefreshHandler(
         {
             throw new ApplicatioException("Refresh token not found");
         }
+        
+        if (refreshToken.Expiry < DateTime.UtcNow)
+        {
+            throw new ApplicationException("Token expired");
+        }
 
         if (_userRepository.GetById(refreshToken.UserId) is not User user)
         {
             throw new ApplicatioException("User not found");
         }
 
-        var accessToken = _jwtTokenGenerator.GenerateToken(user);
-        
-        refreshToken.Value = _jwtTokenGenerator.GenerateToken(user);
-        refreshToken.ExpiryDate = DateTime.UtcNow.AddDays(1);
-
-        _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value);
-
+        refreshToken.Value = _refreshTokenGenerator.GenerateRefreshToken();
+        refreshToken.Created = DateTime.UtcNow;
+        refreshToken.Expiry = DateTime.UtcNow.AddMinutes(2);
         _refreshTokenRepository.Update(refreshToken);
+
+        // Set refresh token to cookie
+        var cookieOptions = new CookieOptions
+        {
+            HttpOnly = true,
+            Expires = refreshToken.Expiry
+        };
+        _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value, cookieOptions);
+        
+        var accessToken = _jwtTokenGenerator.GenerateToken(user);
 
         return Task.FromResult(
             new RefreshResponse(
