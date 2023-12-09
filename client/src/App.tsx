@@ -28,12 +28,10 @@ const App: FC = () => {
 
         <Sidebar>
           <Routes>
-            <Route path='/account' element={<PrivateRoute />}>
-              <Route path="/login" element={<LoginPage />} />
-            </Route>
-            <Route path='/' element={<HomePage />} />
+            <Route path="/account/*" element={<PrivateRoute />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
+            <Route path="/" element={<HomePage />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Sidebar>
