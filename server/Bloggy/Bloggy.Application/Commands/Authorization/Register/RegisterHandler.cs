@@ -50,6 +50,7 @@ public class RegisterHandler(
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
+            Expires = refreshToken.Expiry,
         };
         _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value, cookieOptions);
 

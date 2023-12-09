@@ -36,7 +36,8 @@ public class LoginHandler(
 
         var cookieOptions = new CookieOptions
         {
-            HttpOnly = true
+            HttpOnly = true,
+            Expires = refreshToken.Expiry,
         };
         _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value, cookieOptions);
 
