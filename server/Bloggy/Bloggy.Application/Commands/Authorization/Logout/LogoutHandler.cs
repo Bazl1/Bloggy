@@ -24,6 +24,7 @@ public class LogoutHandler(
         }
         
         _refreshTokenRepository.Remove(refreshToken);
+        _httpContextAccessor.HttpContext.Response.Cookies.Delete("refreshToken");
 
         return Task.FromResult(
             new LogoutResponse()

@@ -4,6 +4,7 @@ using Bloggy.Application.Persistense;
 using Bloggy.Application.Services.Authorization;
 using Bloggy.Domain.Entites;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace Bloggy.Application.Commands.Authorization.Login;
 
@@ -11,7 +12,8 @@ public class LoginHandler(
     IUserRepository _userRepository,
     IRefreshTokenRepository _refreshTokenRepository,
     IPasswordHasher _passwordHasher,
-    IJwtTokenGenerator _jwtTokenGenerator
+    IJwtTokenGenerator _jwtTokenGenerator,
+    IHttpContextAccessor _httpContextAccessor
 ) : IRequestHandler<LoginRequest, LoginResponse>
 {
     public Task<LoginResponse> Handle(LoginRequest request, CancellationToken cancellationToken)
@@ -33,6 +35,8 @@ public class LoginHandler(
         userRefreshToken.Value = refreshToken;
         userRefreshToken.ExpiryDate = DateTime.UtcNow.AddDays(1);
         _refreshTokenRepository.Update(userRefreshToken);
+
+        _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", userRefreshToken.Value);
 
         return Task.FromResult(
             new LoginResponse(
