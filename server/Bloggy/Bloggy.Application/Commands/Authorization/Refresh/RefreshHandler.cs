@@ -1,4 +1,5 @@
 using Bloggy.Application.Common;
+using Bloggy.Application.Common.Dots;
 using Bloggy.Application.Persistense;
 using Bloggy.Application.Services.Authorization;
 using Bloggy.Domain.Entites;
@@ -25,10 +26,22 @@ public class RefreshHandler(
         }
 
         var accessToken = _jwtTokenGenerator.GenerateToken(user);
+        
+        refreshToken.Value = _jwtTokenGenerator.GenerateToken(user);
+        refreshToken.ExpiryDate = DateTime.UtcNow.AddDays(1);
+        _refreshTokenRepository.Update(refreshToken);
 
         return Task.FromResult(
             new RefreshResponse(
-                AccessToken: accessToken
+                AccessToken: accessToken,
+                RefreshToken: refreshToken.Value,
+                User: new UserDto
+                {
+                    Id = user.Id.ToString(),
+                    ImageUri = user.ImageUri,
+                    Name = user.Name,
+                    Email = user.Email
+                }
             )
         );
     }
