@@ -4,5 +4,6 @@ namespace Bloggy.Application.Services.Authorization;
 
 public interface IJwtTokenGenerator
 {
-    string GenerateToken(User user);
+    string GenerateAccessToken(User user);
+    string GenerateRefreshToken(User user);
 }

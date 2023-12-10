@@ -13,7 +13,6 @@ public class LoginHandler(
     IRefreshTokenRepository _refreshTokenRepository,
     IPasswordHasher _passwordHasher,
     IJwtTokenGenerator _jwtTokenGenerator,
-    IRefreshTokenGenerator _refreshTokenGenerator,
     IHttpContextAccessor _httpContextAccessor
 ) : IRequestHandler<LoginRequest, LoginResponse>
 {
@@ -30,23 +29,19 @@ public class LoginHandler(
         }
 
         var refreshToken = _refreshTokenRepository.GetByUserId(user.Id);
-
-        // Create refresh token
-        refreshToken.Value = _refreshTokenGenerator.GenerateRefreshToken();
+        refreshToken.Value = _jwtTokenGenerator.GenerateRefreshToken(user);
         refreshToken.Created = DateTime.UtcNow;
-        refreshToken.Expiry = DateTime.UtcNow.AddMinutes(2);
-
-        // Update user refresh token
+        refreshToken.Expiry = DateTime.UtcNow.AddMinutes(60);
         _refreshTokenRepository.Update(refreshToken);
 
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
-            Expires = refreshToken.Expiry
+            Expires = refreshToken.Expiry,
         };
         _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value, cookieOptions);
 
-        var accessToken = _jwtTokenGenerator.GenerateToken(user);
+        var accessToken = _jwtTokenGenerator.GenerateAccessToken(user);
 
         return Task.FromResult(
             new LoginResponse(

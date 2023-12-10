@@ -1,3 +1,4 @@
+using System.IdentityModel.Tokens.Jwt;
 using Bloggy.Application.Common;
 using Bloggy.Application.Common.Dots;
 using Bloggy.Application.Persistense;
@@ -12,41 +13,43 @@ public class RefreshHandler(
     IRefreshTokenRepository _refreshTokenRepository,
     IUserRepository _userRepository,
     IJwtTokenGenerator _jwtTokenGenerator,
-    IRefreshTokenGenerator _refreshTokenGenerator,
     IHttpContextAccessor _httpContextAccessor
 ) : IRequestHandler<RefreshRequest, RefreshResponse>
 {
     public Task<RefreshResponse> Handle(RefreshRequest request, CancellationToken cancellationToken)
     {
-        if (_refreshTokenRepository.GetByValue(_httpContextAccessor.HttpContext.Request.Cookies["refreshToken"]) is not RefreshToken refreshToken)
+        string refreshTokenValue = _httpContextAccessor.HttpContext.Request.Cookies["refreshToken"];
+        var refreshToken = _refreshTokenRepository.GetByValue(refreshTokenValue);
+
+        if (refreshToken == null) //  is not RefreshToken refreshToken
         {
-            throw new ApplicatioException("Refresh token not found");
+            throw new ApplicatioException("Invalid refresh token");
         }
         
-        if (refreshToken.Expiry < DateTime.UtcNow)
-        {
-            throw new ApplicationException("Token expired");
-        }
-
         if (_userRepository.GetById(refreshToken.UserId) is not User user)
         {
-            throw new ApplicatioException("User not found");
+            throw new ApplicatioException("Invalid refresh token");
         }
 
-        refreshToken.Value = _refreshTokenGenerator.GenerateRefreshToken();
+        if (refreshToken.Expiry < DateTime.UtcNow)
+        {
+            throw new ApplicatioException("Token expired");
+        }
+
+        refreshToken.Value = _jwtTokenGenerator.GenerateRefreshToken(user);
         refreshToken.Created = DateTime.UtcNow;
-        refreshToken.Expiry = DateTime.UtcNow.AddMinutes(2);
+        refreshToken.Expiry = DateTime.UtcNow.AddMinutes(60);
         _refreshTokenRepository.Update(refreshToken);
 
         // Set refresh token to cookie
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
-            Expires = refreshToken.Expiry
+            Expires = refreshToken.Expiry,
         };
         _httpContextAccessor.HttpContext.Response.Cookies.Append("refreshToken", refreshToken.Value, cookieOptions);
         
-        var accessToken = _jwtTokenGenerator.GenerateToken(user);
+        var accessToken = _jwtTokenGenerator.GenerateAccessToken(user);
 
         return Task.FromResult(
             new RefreshResponse(
