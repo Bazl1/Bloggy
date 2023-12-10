@@ -9,7 +9,7 @@ import { observer } from 'mobx-react-lite'
 import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import { FC, useContext, useEffect } from 'react';
 import { Context } from './main';
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import AccountPage from './pages/AccountPage/AccountPage';
 
 const App: FC = () => {
   const { store } = useContext(Context)
@@ -28,7 +28,7 @@ const App: FC = () => {
 
         <Sidebar>
           <Routes>
-            <Route path="/account/*" element={<PrivateRoute />} />
+            <Route path="/account" element={<AccountPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
             <Route path="/" element={<HomePage />} />

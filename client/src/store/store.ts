@@ -1,6 +1,7 @@
 import { IUser } from "../models/IUser";
 import { makeAutoObservable } from 'mobx'
 import AuthService from "../service/UserServer";
+import SettingService from "../service/SettingService";
 
 export default class Store {
     user = {} as IUser;
@@ -70,6 +71,15 @@ export default class Store {
 
             localStorage.setItem('token', response.data.result.accessToken);
             this.setAuth(true);
+            this.setUser(response.data.result.user);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async ChangeImg(imageUri: any) {
+        try {
+            const response = await SettingService.ChangeImg(imageUri);
             this.setUser(response.data.result.user);
         } catch (error) {
             console.log(error)
