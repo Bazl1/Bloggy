@@ -26,12 +26,7 @@ public class ChangePasswordHandler(
             throw new ApplicationException("Unauthorized");
         }
 
-        if (!_passwordHasher.Verify(request.OldPassword, user.Password))
-        {
-            throw new ApplicationException("Password mismatch");
-        }
-
-        user.Password = _passwordHasher.Hash(request.NewPassword);
+        user.Password = _passwordHasher.Hash(request.Password);
         _userRepository.Update(user);
 
         return Task.FromResult(

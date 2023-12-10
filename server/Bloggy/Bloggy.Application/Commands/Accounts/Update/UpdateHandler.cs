@@ -1,22 +1,30 @@
+using System.Security.Claims;
 using Bloggy.Application.Common.Dots;
 using Bloggy.Application.Persistense;
 using Bloggy.Domain.Entites;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 
 namespace Bloggy.Application.Commands.Accounts.Update;
 
 public class UpdateHandler(
-    IUserRepository _userRepository
+    IUserRepository _userRepository,
+    IHttpContextAccessor _httpContextAccessor
 ) : IRequestHandler<UpdateRequest, UpdateResponse>
 {
     public Task<UpdateResponse> Handle(UpdateRequest request, CancellationToken cancellationToken)
     {
-        if (_userRepository.GetById(request.Id) is not User user)
+        if (!Guid.TryParse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out Guid userId))
+        {
+            throw new ApplicationException("Unauthorized");
+        }
+
+        if (_userRepository.GetById(userId) is not User user)
         {
             throw new ApplicationException("User with given id not found");
         }
 
-        user.Name = request.Username;
+        user.Name = request.Name;
         _userRepository.Update(user);
         
         return Task.FromResult(
