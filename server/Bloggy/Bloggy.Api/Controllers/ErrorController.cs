@@ -3,10 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bloggy.Api.Controllers;
 
-[ApiController]
 public class ErrorController : ControllerBase
 {
-    [HttpGet("error")]
+    [Route("/error")]
     public IActionResult Errors()
     {
         Exception? exception = HttpContext.Features.Get<IExceptionHandlerFeature>()?.Error;

@@ -18,7 +18,6 @@ public static class DependencyInjection
         services.Configure<JwtSettings>(configuration.GetSection(JwtSettings.SectionName));
 
         services.AddTransient<IJwtTokenGenerator, JwtTokenGenerator>();
-        services.AddTransient<IRefreshTokenGenerator, RefreshTokenGenerator>();
         services.AddTransient<IPasswordHasher, PasswordHasher>();
 
         services.AddTransient<IUserRepository, UserRepository>();
@@ -47,7 +46,7 @@ public static class DependencyInjection
                 ValidIssuer = jwtSettings.Issuer,
                 ValidAudience = jwtSettings.Audience,
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(jwtSettings.Secret)
+                    Encoding.UTF8.GetBytes(jwtSettings.AccessSecret)
                 )
             });
         

@@ -24,11 +24,6 @@ Content-Type: application/json
 ### Refresh
 POST {{Bloggy_Api_HostAddress}}/api/v1/oauth/refresh
 Accept: application/json
-Content-Type: application/json
-
-{
-    "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwZTg1ZDA3Ny00MjA5LTRkM2MtOGE5ZS03MjdkNmEzNmJhNDIiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiYjRjZTg0OWEtZDk1Mi00ZWE5LThhMzAtNWE1OTI0YWFmY2NiIiwiZXhwIjoxNzAxOTQxNDAzLCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.PuCWvNr84wk_Btkn_W8OSiuF_F5s9gOfkJuy6VoMw7c"
-}
 
 ### Logout
 POST {{Bloggy_Api_HostAddress}}/api/v1/oauth/logout
@@ -43,7 +38,7 @@ Accept: application/json
 ### My
 GET {{Bloggy_Api_HostAddress}}/api/v1/accounts/my
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIwYTJmYTU1Yy00ZGVkLTQ5MTEtOGI1Yi0zYjQyMTgwYzFiMzMiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiMjZhNjhiYWMtMmI3NS00NzM4LWEyY2MtOTEzN2U5MzRlMzczIiwiZXhwIjoxNzAxOTUzMjIyLCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.kmAoZdUJ473B-Qbq3WyBIvoigFhrF6ykgrat-6Umsuo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYmRjOTNlNS01ZGNlLTQzNDUtYThmOC1mYTM4NDMyY2FmZjgiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiY2M5MjljZWMtNjZjZi00YjI0LWIxMTgtZTEzZjIxNDA2OWUyIiwiZXhwIjoxNzAyMTQxNzQxLCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.3szqoBYa-phB3icECJffsb8JzKAWLRCfrIM2QxSVa5s
 Content-Type: application/json
 
 ### Change password
