@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Bloggy.Application.Common.Dots;
 using Bloggy.Application.Persistense;
 using Bloggy.Domain.Entites;
 using MediatR;
@@ -25,10 +26,13 @@ public class MyHandler(
 
         return Task.FromResult(
             new MyResponse(
-                Id: user.Id.ToString(),
-                ImageUri: user.ImageUri,
-                Name: user.Name,
-                Email: user.Email
+                User: new UserDto
+                {
+                    Id = user.Id.ToString(),
+                    ImageUri = user.ImageUri,
+                    Name = user.Name,
+                    Email = user.Email
+                }
             )
         );
     }

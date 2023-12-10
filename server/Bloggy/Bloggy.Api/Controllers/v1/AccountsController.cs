@@ -18,14 +18,18 @@ public class AccountsController(
     public IActionResult GetById(Guid userId) => Ok(_mediator.Send(new GetByIdRequest(userId)));
 
     [Authorize]
-    [HttpGet("my")]
-    public IActionResult My() => Ok(_mediator.Send(new MyRequest()));
-
-    [Authorize]
     [HttpPut("change-password")]
     public IActionResult ChangePassword(ChangePasswordRequest request) => Ok(_mediator.Send(request));
 
     [Authorize]
+    [HttpGet("my")]
+    public IActionResult GetMy() => Ok(_mediator.Send(new MyRequest()));
+
+    [Authorize]
+    [HttpPut("my")]
+    public IActionResult UpdateMy() => Ok(_mediator.Send(new MyRequest()));
+
+    [Authorize]
     [HttpDelete("my")]
-    public IActionResult Delete() => Ok(_mediator.Send(new DeleteRequest()));
+    public IActionResult DeleteMy() => Ok(_mediator.Send(new DeleteRequest()));
 }
