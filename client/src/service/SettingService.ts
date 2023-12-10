@@ -8,7 +8,7 @@ export default class SettingService {
     }
 
     static async ChangePassword(password: string): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>('/accounts/change-password', { password })
+        return $api.put<AuthResponse>('/accounts/change-password', { password })
     }
 }
 
