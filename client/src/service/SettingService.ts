@@ -4,7 +4,7 @@ import { AuthResponse } from "../models/response/AuthResponse";
 
 export default class SettingService {
     static async ChangeImg(imageUri: any): Promise<AxiosResponse<AuthResponse>> {
-        return $api.post<AuthResponse>('/accounts/my/image', { imageUri })
+        return $api.post<AuthResponse>('/accounts/my/image', imageUri)
     }
 }
 

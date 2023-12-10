@@ -79,7 +79,9 @@ export default class Store {
 
     async ChangeImg(imageUri: any) {
         try {
-            const response = await SettingService.ChangeImg(imageUri);
+            const formData = new FormData();
+            formData.append('image', imageUri);
+            const response = await SettingService.ChangeImg(formData);
             this.setUser(response.data.result.user);
         } catch (error) {
             console.log(error)
