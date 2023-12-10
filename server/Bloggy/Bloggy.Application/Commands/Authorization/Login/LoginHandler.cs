@@ -52,7 +52,8 @@ public class LoginHandler(
                     Id = user.Id.ToString(),
                     ImageUri = user.ImageUri,
                     Name = user.Name,
-                    Email = user.Email
+                    Email = user.Email,
+                    Password = user.Password
                 }
             )
         );

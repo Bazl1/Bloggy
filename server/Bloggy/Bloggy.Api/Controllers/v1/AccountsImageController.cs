@@ -1,6 +1,5 @@
 using Bloggy.Application.Commands.AccountsImage.Create;
 using Bloggy.Application.Commands.AccountsImage.Delete;
-using Bloggy.Application.Commands.AccountsImage.Update;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
