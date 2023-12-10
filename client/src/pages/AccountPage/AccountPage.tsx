@@ -16,9 +16,7 @@ const AccountPage: React.FC = () => {
         const input = event.target;
         if (input.files && input.files[0]) {
             const reader = new FileReader();
-
             setImgUrl(input.files[0])
-
             reader.onload = function (e) {
                 if (refImg.current) {
                     refImg.current.src = e.target?.result as string;
