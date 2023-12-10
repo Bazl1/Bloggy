@@ -3,21 +3,24 @@ using Bloggy.Application.Persistense;
 using Bloggy.Domain.Entites;
 using MediatR;
 
-namespace Bloggy.Application.Commands.Accounts.GetById;
+namespace Bloggy.Application.Commands.Accounts.Update;
 
-public class GetByIdHandler(
+public class UpdateHandler(
     IUserRepository _userRepository
-) : IRequestHandler<GetByIdRequest, GetByIdResponse>
+) : IRequestHandler<UpdateRequest, UpdateResponse>
 {
-    public Task<GetByIdResponse> Handle(GetByIdRequest request, CancellationToken cancellationToken)
+    public Task<UpdateResponse> Handle(UpdateRequest request, CancellationToken cancellationToken)
     {
         if (_userRepository.GetById(request.Id) is not User user)
         {
             throw new ApplicationException("User with given id not found");
         }
 
+        user.Name = request.Name;
+        _userRepository.Update(user);
+        
         return Task.FromResult(
-            new GetByIdResponse(
+            new UpdateResponse(
                 User: new UserDto
                 {
                     Id = user.Id.ToString(),

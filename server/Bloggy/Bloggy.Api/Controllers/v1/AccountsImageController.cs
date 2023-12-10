@@ -19,7 +19,4 @@ public class AccountsImageController(
 
     [HttpDelete]
     public IActionResult Delete() => Ok(_mediator.Send(new DeleteRequest()));
-
-    [HttpPut]
-    public IActionResult Update(IFormFile image) => Ok(_mediator.Send(new UpdateRequest(image)));
 }
