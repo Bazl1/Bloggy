@@ -1,3 +1,7 @@
+using Bloggy.Application.Common.Dots;
+
 namespace Bloggy.Application.Commands.AccountsImage.Create;
 
-public record CreateResponse();
+public record CreateResponse(
+    UserDto User
+);
