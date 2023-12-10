@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Bloggy.Application.Common.Dots;
 using Bloggy.Application.Persistense;
 using Bloggy.Domain.Entites;
 using MediatR;
@@ -36,6 +37,16 @@ public class DeleteHandler(
         user.ImageUri = null;
         _userRepository.Update(user);
 
-        return Task.FromResult(new DeleteResponse());
+        return Task.FromResult(
+            new DeleteResponse(
+                User: new UserDto
+                {
+                    Id = user.Id.ToString(),
+                    ImageUri = user.ImageUri,
+                    Name = user.Name,
+                    Email = user.Email
+                }
+            )
+        );
     }
 }
