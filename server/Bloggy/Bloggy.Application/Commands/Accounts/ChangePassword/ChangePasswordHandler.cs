@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using Bloggy.Application.Common.Dots;
 using Bloggy.Application.Persistense;
 using Bloggy.Application.Services.Authorization;
 using Bloggy.Domain.Entites;
@@ -33,6 +34,17 @@ public class ChangePasswordHandler(
         user.Password = _passwordHasher.Hash(request.NewPassword);
         _userRepository.Update(user);
 
-        return Task.FromResult(new ChangePasswordResponse());
+        return Task.FromResult(
+            new ChangePasswordResponse(
+                User: new UserDto
+                {
+                    Id = user.Id.ToString(),
+                    ImageUri = user.ImageUri,
+                    Name = user.Name,
+                    Email = user.Email,
+                    Password = user.Password
+                }
+            )
+        );
     }
 }

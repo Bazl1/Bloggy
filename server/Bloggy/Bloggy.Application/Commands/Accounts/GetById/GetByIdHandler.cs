@@ -18,7 +18,7 @@ public class GetByIdHandler(
 
         return Task.FromResult(
             new GetByIdResponse(
-                User: new UserDto
+                User: new UserWithoutPasswordDto
                 {
                     Id = user.Id.ToString(),
                     ImageUri = user.ImageUri,
