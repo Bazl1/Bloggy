@@ -1,20 +1,18 @@
 using System.Security.Claims;
 using Bloggy.Application.Common.Dots;
 using Bloggy.Application.Persistense;
-using Bloggy.Application.Services.Authorization;
 using Bloggy.Domain.Entites;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 
-namespace Bloggy.Application.Commands.Accounts.ChangePassword;
+namespace Bloggy.Application.Commands.Accounts.Update;
 
-public class ChangePasswordHandler(
+public class UpdateHandler(
     IUserRepository _userRepository,
-    IPasswordHasher _passwordHasher,
     IHttpContextAccessor _httpContextAccessor
-) : IRequestHandler<ChangePasswordRequest, ChangePasswordResponse>
+) : IRequestHandler<UpdateRequest, UpdateResponse>
 {
-    public Task<ChangePasswordResponse> Handle(ChangePasswordRequest request, CancellationToken cancellationToken)
+    public Task<UpdateResponse> Handle(UpdateRequest request, CancellationToken cancellationToken)
     {
         if (!Guid.TryParse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out Guid userId))
         {
@@ -23,14 +21,14 @@ public class ChangePasswordHandler(
 
         if (_userRepository.GetById(userId) is not User user)
         {
-            throw new ApplicationException("Unauthorized");
+            throw new ApplicationException("User with given id not found");
         }
 
-        user.Password = _passwordHasher.Hash(request.Password);
+        user.Name = request.Name;
         _userRepository.Update(user);
-
+        
         return Task.FromResult(
-            new ChangePasswordResponse(
+            new UpdateResponse(
                 User: new UserDto
                 {
                     Id = user.Id.ToString(),

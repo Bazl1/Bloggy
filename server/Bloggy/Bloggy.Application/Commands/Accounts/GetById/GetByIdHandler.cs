@@ -1,3 +1,4 @@
+using Bloggy.Application.Common.Dots;
 using Bloggy.Application.Persistense;
 using Bloggy.Domain.Entites;
 using MediatR;
@@ -17,10 +18,13 @@ public class GetByIdHandler(
 
         return Task.FromResult(
             new GetByIdResponse(
-                Id: user.Id.ToString(),
-                ImageUri: user.ImageUri,
-                Name: user.Name,
-                Email: user.Email
+                User: new UserWithoutPasswordDto
+                {
+                    Id = user.Id.ToString(),
+                    ImageUri = user.ImageUri,
+                    Name = user.Name,
+                    Email = user.Email
+                }
             )
         );
     }

@@ -29,10 +29,25 @@ public class LoginHandler(
         }
 
         var refreshToken = _refreshTokenRepository.GetByUserId(user.Id);
-        refreshToken.Value = _jwtTokenGenerator.GenerateRefreshToken(user);
-        refreshToken.Created = DateTime.UtcNow;
-        refreshToken.Expiry = DateTime.UtcNow.AddMinutes(60);
-        _refreshTokenRepository.Update(refreshToken);
+        if (refreshToken == null)
+        {
+            refreshToken = new RefreshToken
+            {
+                UserId = user.Id,
+                Created = DateTime.UtcNow,
+                Expiry = DateTime.UtcNow.AddMinutes(60),
+                Value = _jwtTokenGenerator.GenerateRefreshToken(user),
+            };
+            _refreshTokenRepository.Add(refreshToken);
+        }
+        else
+        {
+            refreshToken.Value = _jwtTokenGenerator.GenerateRefreshToken(user);
+            refreshToken.Created = DateTime.UtcNow;
+            refreshToken.Expiry = DateTime.UtcNow.AddMinutes(60);
+            _refreshTokenRepository.Update(refreshToken);
+        }
+
 
         var cookieOptions = new CookieOptions
         {
@@ -52,7 +67,8 @@ public class LoginHandler(
                     Id = user.Id.ToString(),
                     ImageUri = user.ImageUri,
                     Name = user.Name,
-                    Email = user.Email
+                    Email = user.Email,
+                    Password = user.Password
                 }
             )
         );

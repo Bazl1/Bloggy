@@ -1,6 +1,5 @@
 using Bloggy.Application.Commands.AccountsImage.Create;
 using Bloggy.Application.Commands.AccountsImage.Delete;
-using Bloggy.Application.Commands.AccountsImage.Update;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +18,4 @@ public class AccountsImageController(
 
     [HttpDelete]
     public IActionResult Delete() => Ok(_mediator.Send(new DeleteRequest()));
-
-    [HttpPut]
-    public IActionResult Update(IFormFile image) => Ok(_mediator.Send(new UpdateRequest(image)));
 }
