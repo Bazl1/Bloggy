@@ -1,30 +1,24 @@
 import s from './AccountPage.module.scss';
-import user from '../../assets/img/icons/user.png';
-import { MdFileDownload } from "react-icons/md";
 import { IoSettingsSharp } from "react-icons/io5";
-import { useContext, useRef, useState } from 'react';
+import FileInputImg from '../../components/FileInputImg/FileInputImg';
+import { useContext, useState } from 'react';
 import { Context } from '../../main';
-import { observer } from 'mobx-react-lite';
 
 const AccountPage: React.FC = () => {
-    const [imgUrl, setImgUrl] = useState<any>('')
-    const refImg = useRef<HTMLImageElement | null>(null);
+    const [newPassword, setNewPassword] = useState<string>('');
+    const [repeatPassword, setRepeatPassword] = useState<string>('');
 
-    const { store } = useContext(Context)
 
-    const readURL = (event: React.ChangeEvent<HTMLInputElement>) => {
-        const input = event.target;
-        if (input.files && input.files[0]) {
-            const reader = new FileReader();
-            setImgUrl(input.files[0])
-            reader.onload = function (e) {
-                if (refImg.current) {
-                    refImg.current.src = e.target?.result as string;
-                }
-            };
-            reader.readAsDataURL(input.files[0]);
+    const { store } = useContext(Context);
+
+    const Submit = () => {
+        if (newPassword && repeatPassword && newPassword !== repeatPassword) {
+            return alert("Пароли не совпадают!");
         }
-    };
+
+        return store.ChangePassword(newPassword);
+    }
+
 
     return (
         <section className={s.account}>
@@ -34,33 +28,16 @@ const AccountPage: React.FC = () => {
                     <div className={s.account__box}>
                         <div className={s.account__columns}>
                             <h3 className={s.account__sub_title}>Редактировать фото профиля</h3>
-                            <div className={s.account__form}>
-                                <div className={s.account__input_file}>
-                                    <img
-                                        ref={refImg}
-                                        id="file_upload"
-                                        src={user}
-                                        alt="your image"
-                                        className={s.account__upload_img}
-                                    />
-                                    <div className={s.account__file_box}>
-                                        <p className={s.account__file_text}>
-                                            Прикрепить изображение в формате JPG, PNG.
-                                            Максимальный размер 800 Кб.
-                                        </p>
-                                        <div className={s.account__input_file_box}>
-                                            <label className={s.account__input_file_upload}>
-                                                <MdFileDownload className={s.account__input_file_icon} />
-                                                <span className={s.upload_label}>Загрузить фото</span>
-                                                <input type="file" onChange={readURL} accept="image/png, image/jpeg" />
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <button className={s.account__form_btn} onClick={() => store.ChangeImg(imgUrl)}>Сохранить</button>
+                            <FileInputImg />
+                        </div>
+                        <div className={s.account__columns}>
+                            <div className={s.account__password_form}>
+                                <h3 className={s.account__sub_title}>Изменить пароль пользователя</h3>
+                                <input onChange={(e) => setNewPassword(e.target.value)} value={newPassword} className={s.account__input} type="password" placeholder='Введите новый пароль' required />
+                                <input onChange={(e) => setRepeatPassword(e.target.value)} value={repeatPassword} className={s.account__input} type="password" placeholder='Повторите новый пароль' required />
+                                <button className={s.account__btn} onClick={Submit}>Сохранить</button>
                             </div>
                         </div>
-                        <div className={s.account__columns}></div>
                     </div>
                 </div>
             </div>
@@ -68,4 +45,4 @@ const AccountPage: React.FC = () => {
     );
 };
 
-export default observer(AccountPage);
+export default AccountPage;

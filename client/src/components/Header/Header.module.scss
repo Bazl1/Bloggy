@@ -18,12 +18,10 @@
     }
 
     &__user_img {
-        max-width: 35px;
-        max-height: 35px;
+        width: 35px;
+        height: 35px;
         border-radius: 100%;
-        height: auto;
-        width: 100%;
-
+        object-fit: cover;
     }
 
     &__user_box {

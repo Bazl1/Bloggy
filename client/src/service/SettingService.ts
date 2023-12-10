@@ -6,5 +6,9 @@ export default class SettingService {
     static async ChangeImg(imageUri: any): Promise<AxiosResponse<AuthResponse>> {
         return $api.post<AuthResponse>('/accounts/my/image', imageUri)
     }
+
+    static async ChangePassword(password: string): Promise<AxiosResponse<AuthResponse>> {
+        return $api.post<AuthResponse>('/accounts/change-password', { password })
+    }
 }
 

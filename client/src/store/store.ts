@@ -87,4 +87,13 @@ export default class Store {
             console.log(error)
         }
     }
+
+    async ChangePassword(password: string) {
+        try {
+            const response = await SettingService.ChangePassword(password);
+            this.setUser(response.data.result.user);
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }
