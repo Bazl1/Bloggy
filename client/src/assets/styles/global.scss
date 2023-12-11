@@ -3,6 +3,8 @@
 html,
 body {
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 html {
@@ -15,6 +17,7 @@ body {
     line-height: normal;
     font-weight: 400;
     color: #fff;
+    background: #171717;
 }
 
 .wrapper {
@@ -24,6 +27,8 @@ body {
 }
 
 .main {
+    min-height: calc(100vh - 76px);
+    height: auto;
     flex: 1 0 auto;
 }
 

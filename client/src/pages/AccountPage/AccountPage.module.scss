@@ -31,49 +31,4 @@
         color: #fff;
         margin-bottom: 20px;
     }
-
-    &__password_form {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-
-    &__input {
-        outline: none;
-        border: none;
-        padding: 12px 20px;
-        border-radius: 4px;
-        font-size: 16px;
-        font-weight: 500;
-        color: #171717;
-
-        &::placeholder {
-            font-size: 16px;
-            font-weight: 400;
-            color: rgba(#171717, .4);
-        }
-
-        &:focus {
-            box-shadow: 0 0 10px #fff;
-        }
-    }
-
-    &__btn {
-        max-width: 149px;
-        display: flex;
-        justify-content: center;
-        outline: none;
-        border: none;
-        font-size: 16px;
-        color: #fff;
-        background: #ed7926;
-        padding: 12px 30px;
-        cursor: pointer;
-        border-radius: 50px;
-        transition: background .3s;
-
-        &:hover {
-            background: #dc6d26;
-        }
-    }
 }
