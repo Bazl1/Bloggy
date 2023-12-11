@@ -96,4 +96,13 @@ export default class Store {
             console.log(error)
         }
     }
+
+    async ChangeName(name: string) {
+        try {
+            const response = await SettingService.ChangeName(name);
+            this.setUser(response.data.result.user);
+        } catch (error) {
+            console.log(error)
+        }
+    }
 }

@@ -16,7 +16,6 @@
     }
 
     &_container {
-        height: calc(100vh - 76px);
         display: grid;
         grid-template-columns: 320px 1fr;
         max-width: 1920px;
