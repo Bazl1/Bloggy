@@ -4,6 +4,7 @@ import s from './Sidebar.module.scss'
 import { observer } from "mobx-react-lite";
 import { useContext } from "react";
 import { Context } from "../../main";
+import { IoLogOutSharp } from "react-icons/io5";
 
 const Sidebar = ({ children }: any) => {
     const { store } = useContext(Context)
@@ -32,6 +33,9 @@ const Sidebar = ({ children }: any) => {
                                     </li>
                                 )
                             })}
+                            <li className={s.sidebar__item}>
+                                <button onClick={() => store.logout()} className={`${s.sidebar__item_link} ${s.sidebar__item_link_logout}`}><span className={s.sidebar__icon}><IoLogOutSharp /></span>Logout</button>
+                            </li>
                         </ul>
                     </div>
                     : ''
