@@ -24,7 +24,7 @@ public class UpdateHandler(
             throw new ApplicationException("User with given id not found");
         }
 
-        user.Name = request.Name;
+        user.Name = request.Username;
         _userRepository.Update(user);
         
         return Task.FromResult(
