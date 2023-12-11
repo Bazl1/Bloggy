@@ -29,13 +29,23 @@ const FileInputImg = () => {
     return (
         <div className={s.account__form}>
             <div className={s.account__input_file}>
-                <img
-                    ref={refImg}
-                    id="file_upload"
-                    src={user}
-                    alt="your image"
-                    className={s.account__upload_img}
-                />
+                {store.user.imageUri ?
+                    <img
+                        ref={refImg}
+                        id="file_upload"
+                        src={store.user.imageUri}
+                        alt="your avatar"
+                        className={s.account__upload_img}
+                    />
+                    :
+                    <img
+                        ref={refImg}
+                        id="file_upload"
+                        src={user}
+                        alt="your avatar"
+                        className={s.account__upload_img}
+                    />
+                }
                 <div className={s.account__file_box}>
                     <p className={s.account__file_text}>
                         Прикрепить изображение в формате JPG, PNG.
