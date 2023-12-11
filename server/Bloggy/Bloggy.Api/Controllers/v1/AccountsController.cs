@@ -2,6 +2,7 @@ using Bloggy.Application.Commands.Accounts.ChangePassword;
 using Bloggy.Application.Commands.Accounts.Delete;
 using Bloggy.Application.Commands.Accounts.GetById;
 using Bloggy.Application.Commands.Accounts.My;
+using Bloggy.Application.Commands.Accounts.Update;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,7 +28,7 @@ public class AccountsController(
 
     [Authorize]
     [HttpPut("my")]
-    public IActionResult UpdateMy() => Ok(_mediator.Send(new MyRequest()));
+    public IActionResult UpdateMy(UpdateRequest request) => Ok(_mediator.Send(request));
 
     [Authorize]
     [HttpDelete("my")]
