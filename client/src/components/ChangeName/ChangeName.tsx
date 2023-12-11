@@ -10,11 +10,11 @@ const ChangeName: React.FC = () => {
 
 
     return (
-        <form className={s.account__name_form}>
+        <div className={s.account__name_form}>
             <h3 className={s.account__sub_title}>Изменить пароль пользователя</h3>
             <input onChange={(e) => setNewName(e.target.value)} value={newName} className={s.account__input} type="text" placeholder='Введите новое имя' required />
             <button className={s.account__btn} onClick={() => store.ChangeName(newName)} >Сохранить</button>
-        </form>
+        </div>
     )
 }
 

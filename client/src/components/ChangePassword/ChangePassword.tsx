@@ -18,12 +18,12 @@ const ChangePassword: React.FC = () => {
         return store.ChangePassword(newPassword);
     }
     return (
-        <form className={s.account__password_form}>
+        <div className={s.account__password_form}>
             <h3 className={s.account__sub_title}>Изменить пароль пользователя</h3>
             <input onChange={(e) => setNewPassword(e.target.value)} value={newPassword} className={s.account__input} type="password" placeholder='Введите новый пароль' required />
             <input onChange={(e) => setRepeatPassword(e.target.value)} value={repeatPassword} className={s.account__input} type="password" placeholder='Повторите новый пароль' required />
             <button className={s.account__btn} onClick={Submit}>Сохранить</button>
-        </form>
+        </div>
     )
 }
 

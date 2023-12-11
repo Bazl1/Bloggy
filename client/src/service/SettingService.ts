@@ -11,8 +11,8 @@ export default class SettingService {
         return $api.put<AuthResponse>('/accounts/change-password', { password })
     }
 
-    static async ChangeName(name: string): Promise<AxiosResponse<AuthResponse>> {
-        return $api.put<AuthResponse>('/accounts/my', { name })
+    static async ChangeName(username: string): Promise<AxiosResponse<AuthResponse>> {
+        return $api.put<AuthResponse>('/accounts/my', { username })
     }
 }
 

@@ -1,6 +1,5 @@
 import { ReactElement } from "react";
 import { MdHome } from "react-icons/md";
-import { IoLogOutSharp } from "react-icons/io5";
 import { MdAccountCircle } from "react-icons/md";
 
 interface IListItem {
@@ -29,11 +28,6 @@ export const menuAuthList: MenuList = {
             path: '/account',
             name: 'Account',
             icon: <MdAccountCircle />
-        },
-        {
-            path: '/logout',
-            name: 'Logout',
-            icon: <IoLogOutSharp />
         }
     ]
 };

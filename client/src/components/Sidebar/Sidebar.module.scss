@@ -50,6 +50,14 @@
         }
     }
 
+    &__item_link_logout {
+        outline: none;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        padding: 0;
+    }
+
     &__icon {
         svg {
             width: 32px;
