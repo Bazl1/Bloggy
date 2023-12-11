@@ -1,0 +1,50 @@
+.home {
+    &__input_box {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    &__input {
+        padding: 12px 20px;
+        outline: none;
+        border: none;
+        border-radius: 3px;
+        font-size: 16px;
+        font-weight: 500;
+        color: #171717;
+
+        &::placeholder {
+            font-size: 16px;
+            font-weight: 500;
+            color: rgba(#171717, .4);
+        }
+
+        &:focus {
+            box-shadow: 0 0 10px #fff;
+        }
+    }
+
+    &__search_btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        border: none;
+        background: #ed7926;
+        width: 43px;
+        height: 43.4px;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background .3s;
+
+        svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        &:hover {
+            background: #dc6d26;
+        }
+    }
+}

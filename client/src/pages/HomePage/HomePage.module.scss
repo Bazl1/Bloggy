@@ -1,0 +1,9 @@
+.home {
+    padding: 50px 0;
+
+    &__top {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 50px;
+    }
+}
