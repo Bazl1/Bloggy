@@ -18,6 +18,7 @@ body {
     font-weight: 400;
     color: #fff;
     background: #171717;
+    overflow: hidden;
 }
 
 .wrapper {
@@ -27,9 +28,12 @@ body {
 }
 
 .main {
+    padding: 50px 0;
     min-height: calc(100vh - 76px);
+    max-height: 100vh;
     height: auto;
     flex: 1 0 auto;
+    overflow-y: auto;
 }
 
 .footer {
