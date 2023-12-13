@@ -35,7 +35,6 @@ const App: FC = () => {
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </Sidebar>
-
       </Router>
     </>
   );
