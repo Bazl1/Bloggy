@@ -45,9 +45,11 @@ const FormRgister = () => {
                 })} onChange={(e) => setUsername(e.target.value)} value={username} className={s.form__input} type="text" placeholder='Ваше имя' />
                 {errors.FirstName && errors.FirstName.type === "required" ? <div className={s.form__error_message}>Поле обязательно к заполнению</div> : ''}
                 <input {...register('Email', {
-                    required: true
+                    required: true,
+                    pattern: /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u,
                 })} onChange={(e) => setEmail(e.target.value)} value={email} className={s.form__input} type="email" placeholder='Ваша почта' />
                 {errors.Email && errors.Email.type === "required" ? <div className={s.form__error_message}>Поле обязательно к заполнению</div> : ''}
+                {errors.Email && errors.Email.type === "pattern" ? <div className={s.form__error_message}>Некорректный email</div> : ''}
                 <input {...register('Password', {
                     required: true,
                     minLength: 3,
