@@ -5,11 +5,13 @@ import { observer } from "mobx-react-lite";
 import { useContext, useEffect, useState } from "react";
 import { Context } from "../../main";
 import { IoLogOutSharp } from "react-icons/io5";
-import PostsService from '../../service/PostsService';
-import { IPost } from '../../models/IPost';
+import { CategoryResponse } from '../../models/response/CategoryResponse';
+import PostService from "../../service/PostsService";
+import { BiSolidCategory } from "react-icons/bi";
 
 const Sidebar = ({ children }: any) => {
-    const [posts, setPosts] = useState<IPost[]>([])
+    const [posts, setPosts] = useState<CategoryResponse[]>([])
+    const [open, setOpen] = useState<boolean>(false)
 
     const { store } = useContext(Context)
 
@@ -19,7 +21,7 @@ const Sidebar = ({ children }: any) => {
 
     async function fetchCategory() {
         try {
-            const response = await PostsService.fetchCategory();
+            const response = await PostService.fetchCategory();
             setPosts(response.data.result.topics)
         } catch (error) {
             console.log(error)
@@ -28,7 +30,7 @@ const Sidebar = ({ children }: any) => {
 
     return (
         <div className={s.sidebar_container}>
-            <div className={s.sidebar}>
+            <div className={open ? `${s.sidebar} ${s.sidebar__active}` : `${s.sidebar}`}>
                 <nav className={s.sidebar__menu}>
                     <ul className={s.sidebar__list}>
                         {menuList.listItem.map((item: any, index: number) => {
@@ -41,13 +43,16 @@ const Sidebar = ({ children }: any) => {
                     </ul>
                 </nav>
                 <div className={s.sidebar__category}>
-                    {posts.map((item: any) => {
-                        return (
-                            <li key={item.id} className={s.sidebar__item}>
-                                <button className={s.sidebar__item_link}>{item.name}</button>
-                            </li>
-                        )
-                    })}
+                    <ul className={open ? `${s.sidebar__list} ${s.sidebar__list_categorys} ${s.sidebar__list_categorys_active}` : `${s.sidebar__list} ${s.sidebar__list_categorys}`}>
+                        {posts.map((item: any) => {
+                            return (
+                                <li key={item.id} className={`${s.sidebar__item} ${s.sidebar__item_category}`}>
+                                    <button className={s.sidebar__item_btn}><span><BiSolidCategory /></span>{item.name}</button>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                    <button onClick={() => setOpen(current => !current)} className={s.sidebar__more_btn}>{open ? "See less" : "See more"}</button>
                 </div>
                 {store.isAuth ?
                     <div className="sidebar__authmenu">
