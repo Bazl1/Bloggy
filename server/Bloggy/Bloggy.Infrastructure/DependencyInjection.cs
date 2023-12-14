@@ -22,6 +22,7 @@ public static class DependencyInjection
 
         services.AddTransient<IUserRepository, UserRepository>();
         services.AddTransient<ITopicRepository, TopicRepository>();
+        services.AddTransient<IPostRepository, PostRepository>();
         services.AddTransient<IRefreshTokenRepository, RefreshTokenRepository>();
 
         services.AddAuthentication(configuration);
