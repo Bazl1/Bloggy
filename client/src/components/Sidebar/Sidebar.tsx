@@ -14,13 +14,13 @@ const Sidebar = ({ children }: any) => {
     const { store } = useContext(Context)
 
     useEffect(() => {
-        fetchCategory
+        fetchCategory()
     }, [])
 
     async function fetchCategory() {
         try {
             const response = await PostsService.fetchCategory();
-            setPosts(response.data)
+            setPosts(response.data.result.topics)
         } catch (error) {
             console.log(error)
         }

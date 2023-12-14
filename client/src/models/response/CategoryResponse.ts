@@ -1,4 +1,8 @@
 export interface CategoryResponse {
-    id: number;
-    name: string;
+    result: {
+        topics: {
+            id: number;
+            name: string;
+        }
+    }
 }
