@@ -9,7 +9,7 @@ import { SnackbarProvider, enqueueSnackbar } from 'notistack'
 const FormRgister = () => {
     const {
         register,
-        formState: { errors },
+        formState: { errors, isValid },
         handleSubmit,
     } = useForm({
         mode: 'onBlur'
@@ -29,11 +29,15 @@ const FormRgister = () => {
     });
 
     const Submit = () => {
-        store.registration(username, email, password)
-        enqueueSnackbar("Поздравляем с успешной регистрацией!")
-        setUsername('')
-        setEmail('')
-        setPassword('')
+        if (isValid) {
+            store.registration(username, email, password)
+            enqueueSnackbar("Поздравляем с успешной регистрацией!")
+            setUsername('')
+            setEmail('')
+            setPassword('')
+        } else {
+            enqueueSnackbar("Заполните корректно форму")
+        }
     }
 
     return (
