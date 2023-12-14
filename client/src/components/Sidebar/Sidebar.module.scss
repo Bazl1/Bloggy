@@ -2,9 +2,11 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-
+    height: calc(100vh - 76px);
+    gap: 30px;
     padding: 50px 20px;
     border-right: 1px solid rgba(#fff, .1);
+    overflow-y: auto;
 
     &__logo {
         max-width: 75px;
@@ -27,7 +29,6 @@
     &__list {
         display: flex;
         flex-direction: column;
-        gap: 15px;
     }
 
     &__item_link {
@@ -62,6 +63,81 @@
         svg {
             width: 32px;
             height: 32px;
+        }
+    }
+
+    &__category {
+        margin-bottom: auto;
+        padding-top: 30px;
+        border-top: 1px solid rgba(#fff, .1);
+    }
+
+    &__list_categorys {
+        max-height: 400px;
+        height: auto;
+        overflow: hidden;
+        margin-bottom: 5px;
+    }
+
+    &__list_categorys_active {
+        max-height: 100%;
+    }
+
+    &__item {
+        list-style-type: none;
+    }
+
+    &__item+&__item {
+        margin-top: 15px;
+    }
+
+    &__item_category+&__item_category {
+        margin-top: 10px;
+    }
+
+    &__item_btn {
+        outline: none;
+        border: none;
+        background: transparent;
+        display: flex;
+        text-align: start;
+        gap: 6px;
+        font-size: 16px;
+        font-weight: 400;
+        color: #E6E6E6;
+        transition: color .3s;
+        letter-spacing: .5px;
+        cursor: pointer;
+
+        span {
+            margin-top: 1px;
+        }
+
+        &:hover {
+            color: #dc6d26;
+        }
+    }
+
+    &__more_btn {
+        max-width: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        outline: none;
+        border: none;
+        background: transparent;
+        font-size: 12px;
+        font-weight: 500;
+        text-align: center;
+        color: #fff;
+        border-radius: 20px;
+        margin-bottom: auto;
+        padding: 6px 10px;
+        transition: background .3s;
+        cursor: pointer;
+
+        &:hover {
+            background: rgba(#fff, .4);
         }
     }
 }
