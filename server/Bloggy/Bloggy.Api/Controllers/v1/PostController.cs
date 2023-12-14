@@ -5,11 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bloggy.Api.Controllers.v1;
 
-[ApiController]
 [Route("api/v1/posts")]
 public class PostController(
     IMediator _mediator
-) : ControllerBase
+) : BloggyControllerBase
 {
     [HttpPost]
     public IActionResult Create([FromBody] CreateRequest request) => Ok(_mediator.Send(request));

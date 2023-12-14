@@ -5,11 +5,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bloggy.Api.Controllers.v1;
 
-[ApiController]
 [Route("api/v1/posts/{postId:guid}/image")]
 public class PostImageController(
     IMediator _mediator
-) : ControllerBase
+) : BloggyControllerBase
 {
     [Authorize]
     [HttpPost]

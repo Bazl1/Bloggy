@@ -15,7 +15,7 @@ public class DeleteHandler(
 ) : IRequestHandler<DeleteRequest, DeleteResponse>
 {
     public Task<DeleteResponse> Handle(DeleteRequest request, CancellationToken cancellationToken)
-    {
+    {   
         if (!Guid.TryParse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value, out Guid userId))
         {
             throw new ApplicationException("Unauthorized");

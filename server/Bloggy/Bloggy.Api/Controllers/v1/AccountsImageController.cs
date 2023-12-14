@@ -7,11 +7,10 @@ using Microsoft.AspNetCore.Mvc;
 namespace Bloggy.Api.Controllers.v1;
 
 [Authorize]
-[ApiController]
 [Route("api/v1/accounts/my/image")]
 public class AccountsImageController(
     IMediator _mediator
-) : ControllerBase
+) : BloggyControllerBase
 {
     [HttpPost]
     public IActionResult Create(IFormFile image) => Ok(_mediator.Send(new CreateRequest(image)));
