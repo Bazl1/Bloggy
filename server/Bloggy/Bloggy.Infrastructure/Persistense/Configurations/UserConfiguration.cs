@@ -8,13 +8,13 @@ public class UserConfigurations : IEntityTypeConfiguration<User>
 {
     public void Configure(EntityTypeBuilder<User> builder)
     {
-        builder.HasMany(user => user.Posts)
-            .WithOne(post => post.Author)
-            .HasForeignKey(post => post.AuthorId);
+        builder.HasMany(e => e.Posts)
+            .WithOne(e => e.Author)
+            .HasForeignKey(e => e.AuthorId);
 
-        builder.HasOne(user => user.RefreshToken)
-            .WithOne(refreshToken => refreshToken.User)
-            .HasForeignKey<RefreshToken>(refreshToken => refreshToken.UserId)
+        builder.HasOne(e => e.RefreshToken)
+            .WithOne(e => e.User)
+            .HasForeignKey<RefreshToken>(e => e.UserId)
             .OnDelete(DeleteBehavior.Cascade);
     }
 }
