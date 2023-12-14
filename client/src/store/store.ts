@@ -1,10 +1,12 @@
 import { IUser } from "../models/IUser";
+import { IPost } from '../models/IPost'
 import { makeAutoObservable } from 'mobx'
 import AuthService from "../service/UserServer";
 import SettingService from "../service/SettingService";
 
 export default class Store {
     user = {} as IUser;
+    posts = {} as IPost
     isAuth = false;
     redirectCallback: Function | null = null;
 
@@ -18,6 +20,10 @@ export default class Store {
 
     setUser(user: IUser) {
         this.user = user;
+    }
+
+    setPosts(posts: IPost) {
+        this.posts = posts;
     }
 
     setRedirectCallback(callback: Function) {
