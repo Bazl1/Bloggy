@@ -6,12 +6,16 @@ import { IoCreate } from "react-icons/io5";
 import { IoIosCloseCircle } from "react-icons/io";
 import { Context } from '../../main';
 import PostService from '../../service/PostsService';
+import { CategoryResponse } from '../../models/response/CategoryResponse';
 
 const CreatePostPage = () => {
+    const [postTitle, setPostTitle] = useState<string>('')
+    const [postDescr, setPostDescr] = useState<string>('')
     const [open, setOpen] = useState<boolean>(false)
+    const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
     const [imgUrl, setImgUrl] = useState<any>('')
     const refImg = useRef<HTMLImageElement | null>(null);
-    const [posts, setPosts] = useState<CategoryResponse[]>([])
+    const [categorys, setCategorys] = useState<CategoryResponse[]>([])
 
     const { store } = useContext(Context)
 
@@ -22,11 +26,22 @@ const CreatePostPage = () => {
     async function fetchCategory() {
         try {
             const response = await PostService.fetchCategory();
-            setPosts(response.data.result.topics)
+            setCategorys(response.data.result.topics)
         } catch (error) {
             console.log(error)
         }
     }
+
+    const toggleCategory = (categoryId: number) => {
+        const index = selectedCategories.indexOf(categoryId);
+        if (index === -1) {
+            setSelectedCategories([...selectedCategories, categoryId]);
+        } else {
+            const updatedCategories = [...selectedCategories];
+            updatedCategories.splice(index, 1);
+            setSelectedCategories(updatedCategories);
+        }
+    };
 
     const readURL = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target;
@@ -41,6 +56,11 @@ const CreatePostPage = () => {
             reader.readAsDataURL(input.files[0]);
         }
     };
+
+    const Submit = (e: any) => {
+        e.preventDefault()
+        store.CreatePost(postTitle, postDescr, selectedCategories, imgUrl)
+    }
 
     return (
         <section className={s.postform}>
@@ -80,25 +100,31 @@ const CreatePostPage = () => {
                             <form className={s.postform__form}>
                                 <label className={s.postform__input_box}>
                                     <span>Post title</span>
-                                    <input className={s.postform__input} type="text" placeholder='Enter title' />
+                                    <input onChange={(e) => setPostTitle(e.target.value)} value={postTitle} className={s.postform__input} type="text" placeholder='Enter title' />
                                 </label>
                                 <label className={s.postform__input_box}>
                                     <span>Post description</span>
-                                    <textarea className={s.postform__textarea} placeholder='Enter description'></textarea>
+                                    <textarea onChange={(e) => setPostDescr(e.target.value)} value={postDescr} className={s.postform__textarea} placeholder='Enter description'></textarea>
                                 </label>
+                                <button type='submit' className={s.postform__btn} onClick={(e) => Submit(e)}>Submit</button>
                             </form>
-                            <button className={s.postform__category_all}>Select post category</button>
+                            <button onClick={() => setOpen(current => !current)} className={s.postform__category_all}>Select post category</button>
                         </div>
                     </div>
-                    <div className="postform__popup">
-                        <div className="postform__popup_top">
-                            <h3 className="postform__popup_title">Select a category</h3>
-                            <button className="postform__popup_close"><IoIosCloseCircle /></button>
+                    <div className={`${s.postform__popup} ${open ? s.postform__popup_active : ''}`}>
+                        <div className={s.postform__popup_top}>
+                            <h3 className={s.postform__popup_title}>Select a category</h3>
+                            <button onClick={() => setOpen(false)} className={s.postform__popup_close}><IoIosCloseCircle /></button>
                         </div>
-                        <div className="postform__popup_items">
-                            <div className="postform__popup_item">
-
-                            </div>
+                        <div className={s.postform__popup_items}>
+                            {categorys.map((item: any) => {
+                                const isSelected = selectedCategories.includes(item.id);
+                                return (
+                                    <div className={s.postform__popup_item} key={item.id}>
+                                        <button className={`${s.postform__item_btn} ${isSelected ? s.postform__item_btn_active : ''}`} onClick={() => toggleCategory(item.id)}>{item.name}</button>
+                                    </div>
+                                )
+                            })}
                         </div>
                     </div>
                 </div>

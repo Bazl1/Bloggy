@@ -3,10 +3,11 @@ import { IPost } from '../models/IPost'
 import { makeAutoObservable } from 'mobx'
 import AuthService from "../service/UserServer";
 import SettingService from "../service/SettingService";
+import PostService from "../service/PostsService";
 
 export default class Store {
     user = {} as IUser;
-    posts = {} as IPost
+    post = {} as IPost
     isAuth = false;
     redirectCallback: Function | null = null;
 
@@ -22,8 +23,8 @@ export default class Store {
         this.user = user;
     }
 
-    setPosts(posts: IPost) {
-        this.posts = posts;
+    setPost(post: IPost) {
+        this.post = post;
     }
 
     setRedirectCallback(callback: Function) {
@@ -107,6 +108,17 @@ export default class Store {
         try {
             const response = await SettingService.ChangeName(username);
             this.setUser(response.data.result.user);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async CreatePost(title: string, description: string, topics: number[], imageUri: any) {
+        try {
+            const responsePost = await PostService.CreatePost(title, description, topics)
+            const formData = new FormData();
+            formData.append('image', imageUri);
+            const responsePostImg = await PostService.CreatePostImage(responsePost.data.result.post.id, formData)
         } catch (error) {
             console.log(error)
         }

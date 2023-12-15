@@ -1,4 +1,8 @@
 .postform {
+    &__inner {
+        position: relative;
+    }
+
     &__title {
         display: flex;
         align-items: center;
@@ -200,5 +204,81 @@
             font-size: 18px;
             font-weight: 500;
         }
+    }
+
+    &__popup {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+        background: #fff;
+        padding: 30px;
+        border-radius: 3px;
+        box-shadow: 0 0 10px #fff;
+    }
+
+    &__popup_active {
+        display: block;
+    }
+
+    &__popup_title {
+        font-size: 21px;
+        font-weight: 500;
+        color: #171717;
+    }
+
+    &__popup_close {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: transparent;
+        outline: none;
+        border: none;
+        width: 42px;
+        height: 42px;
+        cursor: pointer;
+
+        svg {
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    &__popup_top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 50px;
+    }
+
+    &__popup_items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px 15px;
+    }
+
+    &__item_btn {
+        border: 1px solid #171717;
+        border-radius: 20px;
+        font-size: 16px;
+        color: #171717;
+        font-weight: 500;
+        padding: 8px 16px;
+        background: transparent;
+        cursor: pointer;
+        transition: background .3s, color .3s;
+
+        &:hover {
+            background: #171717;
+            color: #fff;
+        }
+    }
+
+    &__item_btn_active {
+        background: #171717;
+        color: #fff;
     }
 }
