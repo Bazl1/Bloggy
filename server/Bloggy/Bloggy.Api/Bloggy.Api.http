@@ -86,7 +86,7 @@ Accept: application/json
 POST {{Bloggy_Api_HostAddress}}/api/v1/posts/
 Accept: : application/json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMTM4Yjk0OS00OGEwLTQyNDItYTNiOC0zNzJjNzhmMmJjNGEiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiYmY0OWQ1ZjQtNjExYy00ZDA4LThmZWQtZWZlOWY0OWI1OWU3IiwiZXhwIjoxNzAyNjQ4NzQxLCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.ZTEGnvgUg2NwqUxJ4QRKPgpMRD3UfxW-EUDgDTJT1_Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OTAxMWFlMC02NDFkLTQzODctYTIxMS1mMTJlMDVmYzhjZWIiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiYjIyZTY2NWEtMmFkZS00MmZjLTljOTQtYjRkZGE0Yjg3NGVkIiwiZXhwIjoxNzAyNjUxNzg5LCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.s5Hdn_ZYZ8AduVkUHKRPzXMXPcKW7ebUcovIVJ_PYuI
 
 {
     "title": "Post 1",
@@ -97,3 +97,17 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMTM4Yjk0O
 ### Get all posts
 GET {{Bloggy_Api_HostAddress}}/api/v1/posts/
 Accept: : application/json
+
+### Upload post image
+
+POST {{Bloggy_Api_HostAddress}}/api/v1/posts/53b5dbcb-1f8a-472d-bcdf-2e24f9e65805/image
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OTAxMWFlMC02NDFkLTQzODctYTIxMS1mMTJlMDVmYzhjZWIiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiYjIyZTY2NWEtMmFkZS00MmZjLTljOTQtYjRkZGE0Yjg3NGVkIiwiZXhwIjoxNzAyNjUxNzg5LCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.s5Hdn_ZYZ8AduVkUHKRPzXMXPcKW7ebUcovIVJ_PYuI
+Content-Type: multipart/form-data; boundary=MfnBoundry
+
+--MfnBoundrys
+Content-Disposition: form-data; name="Image"; filename="logo.png"
+Content-Type: image/png
+
+< C:\Users\kiril\Downloads\logo.png
+--MfnBoundry--
