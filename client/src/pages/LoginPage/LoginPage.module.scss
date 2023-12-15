@@ -30,6 +30,17 @@
         opacity: .5;
     }
 
+    &__title {
+        max-width: 600px;
+        width: 100%;
+        font-size: 32px;
+        font-weight: 700;
+        text-align: center;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 30px;
+    }
+
     &__inner {
         min-height: 100%;
         display: flex;
