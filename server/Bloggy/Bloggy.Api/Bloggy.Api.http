@@ -81,3 +81,19 @@ Accept: application/json
 ### Get all topics
 GET {{Bloggy_Api_HostAddress}}/api/v1/topics/
 Accept: application/json
+
+### Create new post
+POST {{Bloggy_Api_HostAddress}}/api/v1/posts/
+Accept: : application/json
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJiOWNhZDI2MS1kZWZhLTRiNGYtYjM5Yi0wZmNhNDlmYmQ1ODMiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiNzE5MWQ5YWUtOTJkMi00MmFkLTllMWQtNGIwODAzMGQ4ZGE1IiwiZXhwIjoxNzAyNTY1MDE5LCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.Ke9hMNWiCpWXkibCdKxhNrhJq_I1OcXvza5EP4PeqYk
+
+{
+    "title": "Post 1",
+    "description": "...",
+    "topics": [1,2,3]
+}
+
+### Get all posts
+GET {{Bloggy_Api_HostAddress}}/api/v1/posts/
+Accept: : application/json

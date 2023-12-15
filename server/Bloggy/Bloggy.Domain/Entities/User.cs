@@ -8,5 +8,5 @@ public class User
     public string Name { get; set; }
     public string Email { get; set; }
     public string Password { get; set; }
-    public IEnumerable<Post> Posts { get; set; } = new List<Post>();
+    public IEnumerable<Post> Posts { get; } = new List<Post>();
 }
