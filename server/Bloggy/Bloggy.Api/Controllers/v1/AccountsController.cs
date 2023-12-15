@@ -9,11 +9,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bloggy.Api.Controllers.v1;
 
-[ApiController]
 [Route("api/v1/accounts")]
 public class AccountsController(
     IMediator _mediator
-) : ControllerBase
+) : BloggyControllerBase
 {
     [HttpGet("{userId:guid}")]
     public IActionResult GetById(Guid userId) => Ok(_mediator.Send(new GetByIdRequest(userId)));

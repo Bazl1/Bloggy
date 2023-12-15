@@ -8,11 +8,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Bloggy.Api.Controllers.v1;
 
-[ApiController]
 [Route("api/v1/oauth")]
 public class OAuthController(
     IMediator _mediator
-) : ControllerBase
+) : BloggyControllerBase
 {
     [HttpPost("register")]
     public IActionResult Register([FromBody] RegisterRequest request) => Ok(_mediator.Send(request));
