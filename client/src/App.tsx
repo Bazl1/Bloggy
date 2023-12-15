@@ -10,6 +10,7 @@ import RegistrationPage from './pages/RegistrationPage/RegistrationPage';
 import { FC, useContext, useEffect } from 'react';
 import { Context } from './main';
 import AccountPage from './pages/AccountPage/AccountPage';
+import CreatePostPage from './pages/CreatePostPage/CreatePostPage';
 
 const App: FC = () => {
   const { store } = useContext(Context)
@@ -28,6 +29,7 @@ const App: FC = () => {
 
         <Sidebar>
           <Routes>
+            <Route path="/create-post" element={<CreatePostPage />} />
             <Route path="/account" element={<AccountPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/registration" element={<RegistrationPage />} />
