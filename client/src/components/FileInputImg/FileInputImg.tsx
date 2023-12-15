@@ -48,19 +48,19 @@ const FileInputImg = () => {
                 }
                 <div className={s.account__file_box}>
                     <p className={s.account__file_text}>
-                        Прикрепить изображение в формате JPG, PNG.
-                        Максимальный размер 800 Кб.
+                        Attach an image in JPG, PNG format.<br />
+                        Maximum size 800 KB.
                     </p>
                     <div className={s.account__input_file_box}>
                         <label className={s.account__input_file_upload}>
                             <MdFileDownload className={s.account__input_file_icon} />
-                            <span className={s.account__upload_label}>Загрузить фото</span>
+                            <span className={s.account__upload_label}>Upload a photo</span>
                             <input className={s.account__upload_input} type="file" onChange={readURL} accept="image/png, image/jpeg" />
                         </label>
                     </div>
                 </div>
             </div>
-            <button className={s.account__form_btn} onClick={() => store.ChangeImg(imgUrl)}>Сохранить</button>
+            <button className={s.account__form_btn} onClick={() => store.ChangeImg(imgUrl)}>Submit</button>
         </div>
     )
 }

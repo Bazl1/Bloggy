@@ -45,4 +45,10 @@
             background: #dc6d26;
         }
     }
+    &__error_message {
+        font-size: 14px;
+        font-weight: 500;
+        letter-spacing: .5px;
+        color: #d30000;
+    }
 }

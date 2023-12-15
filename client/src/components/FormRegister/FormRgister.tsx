@@ -31,12 +31,12 @@ const FormRgister = () => {
     const Submit = () => {
         if (isValid) {
             store.registration(username, email, password)
-            enqueueSnackbar("Поздравляем с успешной регистрацией!")
+            enqueueSnackbar("Congratulations on your successful registration!")
             setUsername('')
             setEmail('')
             setPassword('')
         } else {
-            enqueueSnackbar("Заполните корректно форму")
+            enqueueSnackbar("Fill out the form correctly")
         }
     }
 
@@ -46,23 +46,23 @@ const FormRgister = () => {
             <form className={s.form} onSubmit={handleSubmit(Submit)}>
                 <input {...register('FirstName', {
                     required: true
-                })} onChange={(e) => setUsername(e.target.value)} value={username} className={s.form__input} type="text" placeholder='Ваше имя' />
-                {errors.FirstName && errors.FirstName.type === "required" ? <div className={s.form__error_message}>Поле обязательно к заполнению</div> : ''}
+                })} onChange={(e) => setUsername(e.target.value)} value={username} className={s.form__input} type="text" placeholder='Your name' />
+                {errors.FirstName && errors.FirstName.type === "required" ? <div className={s.form__error_message}>This field is required</div> : ''}
                 <input {...register('Email', {
                     required: true,
                     pattern: /^((([0-9A-Za-z]{1}[-0-9A-z\.]{1,}[0-9A-Za-z]{1})|([0-9А-Яа-я]{1}[-0-9А-я\.]{1,}[0-9А-Яа-я]{1}))@([-A-Za-z]{1,}\.){1,2}[-A-Za-z]{2,})$/u,
-                })} onChange={(e) => setEmail(e.target.value)} value={email} className={s.form__input} type="email" placeholder='Ваша почта' />
-                {errors.Email && errors.Email.type === "required" ? <div className={s.form__error_message}>Поле обязательно к заполнению</div> : ''}
-                {errors.Email && errors.Email.type === "pattern" ? <div className={s.form__error_message}>Некорректный email</div> : ''}
+                })} onChange={(e) => setEmail(e.target.value)} value={email} className={s.form__input} type="email" placeholder='Your email' />
+                {errors.Email && errors.Email.type === "required" ? <div className={s.form__error_message}>This field is required</div> : ''}
+                {errors.Email && errors.Email.type === "pattern" ? <div className={s.form__error_message}>Incorrect email</div> : ''}
                 <input {...register('Password', {
                     required: true,
                     minLength: 3,
                     maxLength: 21,
-                })} onChange={(e) => setPassword(e.target.value)} value={password} className={s.form__input} type="password" placeholder='Ваш пароль' />
-                {errors.Password && errors.Password.type === "required" ? <div className={s.form__error_message}>Поле обязательно к заполнению</div> : ''}
-                {errors.Password && errors.Password.type === "minLength" ? <div className={s.form__error_message}>Минимальная длина пароля 3 символа</div> : ''}
-                {errors.Password && errors.Password.type === "maxLength" ? <div className={s.form__error_message}>Максимальная длина пароля 21 символ</div> : ''}
-                <button className={s.form__btn} type='submit'>Зарегистрироваться</button>
+                })} onChange={(e) => setPassword(e.target.value)} value={password} className={s.form__input} type="password" placeholder='Your password' />
+                {errors.Password && errors.Password.type === "required" ? <div className={s.form__error_message}>This field is required</div> : ''}
+                {errors.Password && errors.Password.type === "minLength" ? <div className={s.form__error_message}>Minimum password length 3 characters</div> : ''}
+                {errors.Password && errors.Password.type === "maxLength" ? <div className={s.form__error_message}>Maximum password length 21 characters</div> : ''}
+                <button className={s.form__btn} type='submit'>Register</button>
             </form >
         </>
     )
