@@ -140,4 +140,29 @@
             background: rgba(#fff, .4);
         }
     }
+
+    &__item_link_create {
+        outline: none;
+        border: none;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 18px;
+        font-weight: 400;
+        color: #E6E6E6;
+        padding: 0;
+        margin-top: 15px;
+        transition: color .3s;
+        cursor: pointer;
+
+        span {
+            display: flex;
+            align-items: center;
+        }
+
+        &:hover {
+            color: #dc6d26;
+        }
+    }
 }

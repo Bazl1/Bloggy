@@ -8,6 +8,7 @@ import { IoLogOutSharp } from "react-icons/io5";
 import { CategoryResponse } from '../../models/response/CategoryResponse';
 import PostService from "../../service/PostsService";
 import { BiSolidCategory } from "react-icons/bi";
+import { IoCreateOutline } from "react-icons/io5";
 
 const Sidebar = ({ children }: any) => {
     const [posts, setPosts] = useState<CategoryResponse[]>([])
@@ -41,6 +42,7 @@ const Sidebar = ({ children }: any) => {
                             )
                         })}
                     </ul>
+                    {store.isAuth ? <NavLink to={'#'} className={`${s.sidebar__item_link} ${s.sidebar__item_link_create}`}><span className={s.sidebar__icon}><IoCreateOutline /></span>Create a post</NavLink> : ''}
                 </nav>
                 <div className={s.sidebar__category}>
                     <ul className={open ? `${s.sidebar__list} ${s.sidebar__list_categorys} ${s.sidebar__list_categorys_active}` : `${s.sidebar__list} ${s.sidebar__list_categorys}`}>
