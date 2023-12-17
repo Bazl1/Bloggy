@@ -22,6 +22,15 @@ public class PostRepository(
             .ToList();
     }
 
+    public IEnumerable<Post> GetByTopicId(int topicId)
+    {
+        return _appDbContext.Posts
+            .Include(p => p.Author)
+            .Include(p => p.Topics)
+            .Where(p => p.Topics.Any(t => t.Id == topicId))
+            .ToList();
+    }
+
     public Post? GetById(Guid postId)
     {
         return _appDbContext.Posts
