@@ -1,6 +1,38 @@
 .postform {
+    height: 100%;
+    position: relative;
+
+    &::after {
+        position: absolute;
+        content: '';
+        background: url('../../assets/img/blog.png') no-repeat center;
+        background-size: cover;
+        width: 200px;
+        height: 200px;
+        bottom: 0;
+        right: 20%;
+        opacity: .2;
+        transform: rotate(-15deg);
+        z-index: 0;
+    }
+
+    &::before {
+        position: absolute;
+        content: '';
+        background: url('../../assets/img/blog1.png') no-repeat center;
+        background-size: cover;
+        width: 150px;
+        height: 150px;
+        bottom: 10%;
+        left: 10%;
+        opacity: .2;
+        transform: rotate(15deg);
+        z-index: 0;
+    }
+
     &__inner {
         position: relative;
+        z-index: 1;
     }
 
     &__title {
