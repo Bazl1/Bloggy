@@ -121,6 +121,8 @@ export default class Store {
             const responsePostImg = await PostService.CreatePostImage(responsePost.data.result.post.id, formData)
 
             this.setPost([...this.posts, responsePostImg.data.result.post]);
+            console.log(responsePostImg.data.result.post)
+            console.log(this.posts)
         } catch (error) {
             console.log(error)
         }
@@ -129,7 +131,9 @@ export default class Store {
     async GetPosts() {
         try {
             const response = await PostService.GetPosts()
-            this.setPost([...this.posts, response.data.result.posts])
+            console.log(response)
+            this.setPost(response.data.result.posts);
+            console.log(this.posts)
         } catch (error) {
             console.log(error)
         }

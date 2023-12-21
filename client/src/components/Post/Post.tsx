@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom'
 import s from './Post.module.scss'
 import user from '../../assets/img/icons/user.png'
-import postImg from '../../assets/img/mem-2-1024x683.jpg'
 import { IoMdArrowDropright } from "react-icons/io";
 import { ITopic } from '../../models/ITopic';
 
@@ -12,9 +11,10 @@ interface PostProps {
     dateCreated: string;
     topics: ITopic[];
     description: string;
+    postImg: string;
 }
 
-const Post: React.FC<PostProps> = ({ title, imageUri, name, dateCreated, topics, description }) => {
+const Post: React.FC<PostProps> = ({ title, imageUri, name, dateCreated, topics, description, postImg }) => {
 
     return (
         <div className={s.home__item}>
