@@ -24,7 +24,7 @@ public class GetAllHandler(
                 ImageUri = p.ImageUri,
                 Title = p.Title,
                 Description = p.Description,
-                DateCreated = p.DateCreated,
+                DateCreated = p.DateCreated.ToString("dd/MM/yyyy HH:mm"),
                 Topics = p.Topics.Select(t => new TopicDto
                 {
                     Id = t.Id,
