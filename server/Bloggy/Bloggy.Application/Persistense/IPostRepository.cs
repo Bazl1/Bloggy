@@ -9,4 +9,5 @@ public interface IPostRepository
     void Update(Post post);
     Post? GetById(Guid postId);
     IEnumerable<Post> GetAll();
+    IEnumerable<Post> GetByTopicId(int topicId);
 }
