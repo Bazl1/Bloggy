@@ -1,4 +1,8 @@
 .home {
+    &__item+&__item {
+        margin-top: 20px;
+    }
+
     &__item {
         max-width: 800px;
         width: 100%;
@@ -86,6 +90,7 @@
         overflow: hidden;
         position: relative;
         word-break: break-all;
+
         &::after {
             content: '';
             position: absolute;
