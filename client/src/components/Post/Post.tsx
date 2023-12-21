@@ -12,9 +12,10 @@ interface PostProps {
     topics: ITopic[];
     description: string;
     postImg: string;
+    postId: string;
 }
 
-const Post: React.FC<PostProps> = ({ title, imageUri, name, dateCreated, topics, description, postImg }) => {
+const Post: React.FC<PostProps> = ({ title, imageUri, name, dateCreated, topics, description, postImg, postId}) => {
 
     return (
         <div className={s.home__item}>
@@ -37,7 +38,7 @@ const Post: React.FC<PostProps> = ({ title, imageUri, name, dateCreated, topics,
                 })}
             </div>
             <p className={s.home__item_text}>{description}</p>
-            <Link to={'#'} className={s.home__item_btn}>Подробнее <span><IoMdArrowDropright /></span></Link>
+            <Link to={'/post/' + postId} className={s.home__item_btn}>Подробнее <span><IoMdArrowDropright /></span></Link>
         </div >
     )
 }

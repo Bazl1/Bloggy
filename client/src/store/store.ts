@@ -34,7 +34,6 @@ export default class Store {
     async login(email: string, password: string) {
         try {
             const response = await AuthService.login(email, password);
-            console.log(response); // Delete this
             localStorage.setItem('token', response.data.result.accessToken);
             this.setAuth(true);
             this.setUser(response.data.result.user);
@@ -49,7 +48,6 @@ export default class Store {
     async registration(username: string, email: string, password: string) {
         try {
             const response = await AuthService.registration(username, email, password);
-            console.log(response); // Delete this
             localStorage.setItem('token', response.data.result.accessToken);
             this.setAuth(true);
             this.setUser(response.data.result.user);
@@ -119,10 +117,7 @@ export default class Store {
             const formData = new FormData();
             formData.append('image', imageUri);
             const responsePostImg = await PostService.CreatePostImage(responsePost.data.result.post.id, formData)
-
             this.setPost([...this.posts, responsePostImg.data.result.post]);
-            console.log(responsePostImg.data.result.post)
-            console.log(this.posts)
         } catch (error) {
             console.log(error)
         }
@@ -131,9 +126,7 @@ export default class Store {
     async GetPosts() {
         try {
             const response = await PostService.GetPosts()
-            console.log(response)
             this.setPost(response.data.result.posts);
-            console.log(this.posts)
         } catch (error) {
             console.log(error)
         }

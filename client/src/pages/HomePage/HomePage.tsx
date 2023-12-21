@@ -20,7 +20,7 @@ const HomePage = () => {
             Array.isArray(store.posts) && store.posts.length > 0 ?
               store.posts.map((item) => {
                 return (
-                  <Post key={item.id} title={item.title} imageUri={item.author.imageUri} name={item.author.name} dateCreated={item.dateCreated} topics={item.topics} description={item.description} postImg={item.imageUri} />
+                  <Post key={item.id} title={item.title} imageUri={item.author.imageUri} name={item.author.name} dateCreated={item.dateCreated} topics={item.topics} description={item.description} postImg={item.imageUri} postId={item.id} />
                 )
               })
               : ''

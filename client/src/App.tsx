@@ -11,6 +11,7 @@ import { FC, useContext, useEffect } from 'react';
 import { Context } from './main';
 import AccountPage from './pages/AccountPage/AccountPage';
 import CreatePostPage from './pages/CreatePostPage/CreatePostPage';
+import SinglePage from './pages/SinglePage/SinglePage';
 
 const App: FC = () => {
   const { store } = useContext(Context)
@@ -32,6 +33,7 @@ const App: FC = () => {
 
         <Sidebar>
           <Routes>
+            <Route path="/post/:id" element={<SinglePage />} />
             <Route path="/create-post" element={<CreatePostPage />} />
             <Route path="/account" element={<AccountPage />} />
             <Route path="/login" element={<LoginPage />} />
