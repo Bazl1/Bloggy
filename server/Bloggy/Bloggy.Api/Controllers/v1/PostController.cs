@@ -1,3 +1,4 @@
+using Bloggy.Application.Commands.Accounts.GetById;
 using Bloggy.Application.Commands.Posts.Create;
 using Bloggy.Application.Commands.Posts.GetAll;
 using MediatR;
@@ -12,6 +13,9 @@ public class PostController(
 {
     [HttpPost]
     public IActionResult Create([FromBody] CreateRequest request) => Ok(_mediator.Send(request));
+
+    [HttpGet("{postId:guid}")]
+    public IActionResult GetById(Guid postId) => Ok(_mediator.Send(new GetByIdRequest(postId)));
 
     [HttpGet]
     public IActionResult GetAll() => Ok(_mediator.Send(new GetAllRequest(0,0)));
