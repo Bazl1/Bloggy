@@ -7,7 +7,7 @@ import PostService from "../service/PostsService";
 
 export default class Store {
     user = {} as IUser;
-    post = {} as IPost
+    posts = [] as IPost[]
     isAuth = false;
     redirectCallback: Function | null = null;
 
@@ -23,8 +23,8 @@ export default class Store {
         this.user = user;
     }
 
-    setPost(post: IPost) {
-        this.post = post;
+    setPost(posts: IPost[]) {
+        this.posts = posts;
     }
 
     setRedirectCallback(callback: Function) {
@@ -119,6 +119,17 @@ export default class Store {
             const formData = new FormData();
             formData.append('image', imageUri);
             const responsePostImg = await PostService.CreatePostImage(responsePost.data.result.post.id, formData)
+
+            this.setPost([...this.posts, responsePostImg.data.result.post]);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async GetPosts() {
+        try {
+            const response = await PostService.GetPosts()
+            this.setPost([...this.posts, response.data.result.posts])
         } catch (error) {
             console.log(error)
         }
