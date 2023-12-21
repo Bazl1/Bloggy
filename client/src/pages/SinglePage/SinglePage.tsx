@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import s from './SinglePage.module.scss'
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../../main';
 import { IPost } from '../../models/IPost';
 
@@ -21,8 +21,8 @@ const SinglePage = () => {
       <div className="container">
         <div className={s.single_post__inner}>
           {
-            typeof post?.imageUri !== 'undefined' ?
-              <img className={s.single_post__img} src={post.imageUri} alt="post_img" />
+            post?.imageUri !== '' ?
+              <img className={s.single_post__img} src={post?.imageUri} alt="post_img" />
               : ''
           }
           <h2 className={s.single_post__title}>{post?.title}</h2>

@@ -3,6 +3,7 @@ import s from './Post.module.scss'
 import user from '../../assets/img/icons/user.png'
 import { IoMdArrowDropright } from "react-icons/io";
 import { ITopic } from '../../models/ITopic';
+import { observer } from 'mobx-react-lite';
 
 interface PostProps {
     title: string;
@@ -45,4 +46,4 @@ const Post: React.FC<PostProps> = ({ title, imageUri, name, dateCreated, topics,
     )
 }
 
-export default Post
+export default observer(Post)
