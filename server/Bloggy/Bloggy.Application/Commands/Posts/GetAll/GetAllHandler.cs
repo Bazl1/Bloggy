@@ -17,7 +17,7 @@ public class GetAllHandler(
                 Author = new UserWithoutPasswordDto
                 {
                     Id = p.Author.Id.ToString(),
-                    ImageUri = p.ImageUri,
+                    ImageUri = p.Author.ImageUri,
                     Name = p.Author.Name,
                     Email = p.Author.Email,
                 },
