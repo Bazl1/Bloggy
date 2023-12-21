@@ -17,11 +17,6 @@ public class RegisterHandler(
 {
     public Task<RegisterResponse> Handle(RegisterRequest request, CancellationToken cancellationToken)
     {
-        if (_userRepository.GetByName(request.Username) is not null)
-        {
-            throw new ApplicationException("User with given username already exists");
-        }
-
         if (_userRepository.GetByEmail(request.Email) is not null)
         {
             throw new ApplicationException("User with given email already exists");
