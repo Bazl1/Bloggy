@@ -15,7 +15,7 @@ interface PostProps {
     postId: string;
 }
 
-const Post: React.FC<PostProps> = ({ title, imageUri, name, dateCreated, topics, description, postImg, postId}) => {
+const Post: React.FC<PostProps> = ({ title, imageUri, name, dateCreated, topics, description, postImg, postId }) => {
 
     return (
         <div className={s.home__item}>
@@ -31,7 +31,9 @@ const Post: React.FC<PostProps> = ({ title, imageUri, name, dateCreated, topics,
                 </div>
             </div>
             <h3 className={s.home__item_title}>{title}</h3>
-            <img className={s.home__item_img} src={postImg} alt="post-img" />
+            {postImg && typeof postImg === 'string' && postImg !== '' ?
+                <img className={s.home__item_img} src={postImg} alt="post-img" />
+                : ''}
             <div className={s.home__item_data_categorys}>
                 {topics.map(topic => {
                     return <div className={s.home__item_data_category}>{topic.name}</div>
