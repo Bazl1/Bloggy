@@ -67,7 +67,8 @@ public class PostRepository(
         return _appDbContext.Posts
             .Include(p => p.Author)
             .Include(p => p.Topics)
-            .Where(p => p.Title.Contains(searchString) || p.Description.Contains(searchString))
+            .Where(p => p.Title.ToUpper().Contains(searchString.ToUpper()) ||
+                    p.Description.ToUpper().Contains(searchString.ToUpper()))
             .OrderByDescending(p => p.DateCreated)
             .ToList();
     }
