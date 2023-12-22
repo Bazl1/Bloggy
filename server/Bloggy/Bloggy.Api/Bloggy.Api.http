@@ -86,7 +86,7 @@ Accept: application/json
 POST {{Bloggy_Api_HostAddress}}/api/v1/posts/
 Accept: : application/json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjNjNzJlYS1mYzk2LTQwY2EtYjJjMC1lOGUyNjdiNWEzZTEiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiMzhkZjg1ZjItNDQ1ZC00YzNmLTgzOTYtN2E5ZDg5ZDgwMGE3IiwiZXhwIjoxNzAzMjQ0MjExLCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.7lNabTP2Yjrg-UaXIRZZcI_b1CdbIOXoEo_ZwRi5j-s
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlMGM2NjBmNy05ZTQ3LTQ1MmUtOTIyNi1lYjQxZDY3YjI2YWIiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiYzc3Y2Y1MGEtMDAyMC00NjMwLTkwYWMtMWM4ZmMyNzkwOTExIiwiZXhwIjoxNzAzMjQ3OTk1LCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.TnNLkXU8o3GDlvkmuR4QN-ffCbOBaXUaEr0wOZOncqA
 
 {
     "title": "Post 1",
@@ -95,7 +95,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjNjNzJlY
 }
 
 ### Get all posts
-GET {{Bloggy_Api_HostAddress}}/api/v1/posts/?categoryId=2
+GET {{Bloggy_Api_HostAddress}}/api/v1/posts/
 Accept: : application/json
 
 ### Upload post image
