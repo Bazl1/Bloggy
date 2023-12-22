@@ -10,27 +10,55 @@ public class GetAllHandler(
 {
     public Task<GetAllResponse> Handle(GetAllRequest request, CancellationToken cancellationToken)
     {
-        var posts = _postRepository.GetAll()
-            .Select(p => new PostDto
-            {
-                Id = p.Id.ToString(),
-                Author = new UserWithoutPasswordDto
+        IEnumerable<PostDto> posts;
+        if (request.CategoryId != -1)
+        {
+            posts = _postRepository.GetByTopicId(request.CategoryId)
+                .Select(p => new PostDto
                 {
-                    Id = p.Author.Id.ToString(),
-                    ImageUri = p.Author.ImageUri,
-                    Name = p.Author.Name,
-                    Email = p.Author.Email,
-                },
-                ImageUri = p.ImageUri,
-                Title = p.Title,
-                Description = p.Description,
-                DateCreated = p.DateCreated.ToString("dd/MM/yyyy HH:mm"),
-                Topics = p.Topics.Select(t => new TopicDto
+                    Id = p.Id.ToString(),
+                    Author = new UserWithoutPasswordDto
+                    {
+                        Id = p.Author.Id.ToString(),
+                        ImageUri = p.Author.ImageUri,
+                        Name = p.Author.Name,
+                        Email = p.Author.Email,
+                    },
+                    ImageUri = p.ImageUri,
+                    Title = p.Title,
+                    Description = p.Description,
+                    DateCreated = p.DateCreated.ToString("dd/MM/yyyy HH:mm"),
+                    Topics = p.Topics.Select(t => new TopicDto
+                    {
+                        Id = t.Id,
+                        Name = t.Name
+                    })
+                });
+        }
+        else
+        {
+            posts = _postRepository.GetAll()
+                .Select(p => new PostDto
                 {
-                    Id = t.Id,
-                    Name = t.Name
-                })
-            });
+                    Id = p.Id.ToString(),
+                    Author = new UserWithoutPasswordDto
+                    {
+                        Id = p.Author.Id.ToString(),
+                        ImageUri = p.Author.ImageUri,
+                        Name = p.Author.Name,
+                        Email = p.Author.Email,
+                    },
+                    ImageUri = p.ImageUri,
+                    Title = p.Title,
+                    Description = p.Description,
+                    DateCreated = p.DateCreated.ToString("dd/MM/yyyy HH:mm"),
+                    Topics = p.Topics.Select(t => new TopicDto
+                    {
+                        Id = t.Id,
+                        Name = t.Name
+                    })
+                });
+        }
 
         return Task.FromResult(new GetAllResponse(posts));
     }

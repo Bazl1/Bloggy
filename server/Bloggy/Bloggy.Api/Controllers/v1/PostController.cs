@@ -18,5 +18,7 @@ public class PostController(
     public IActionResult GetById(Guid postId) => Ok(_mediator.Send(new GetByIdRequest(postId)));
 
     [HttpGet]
-    public IActionResult GetAll() => Ok(_mediator.Send(new GetAllRequest(0,0)));
+    public IActionResult GetAll(
+        [FromQuery] int categoryId = -1
+    ) => Ok(_mediator.Send(new GetAllRequest(0,0, categoryId)));
 }
