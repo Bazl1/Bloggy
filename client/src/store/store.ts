@@ -139,10 +139,10 @@ export default class Store {
         }
     }
 
-    async GetCategoryPosts(id: string | undefined) {
+    async GetSearchPosts(id: string | undefined, type: string) {
         try {
             this.setLoading(this.loading = true)
-            const response = await PostService.SearchCategoryPosts(id)
+            const response = await PostService.SearchCategoryPosts(id, type)
             this.setPost(response.data.result.posts)
             await this.setLoading(this.loading = false)
         } catch (error) {
