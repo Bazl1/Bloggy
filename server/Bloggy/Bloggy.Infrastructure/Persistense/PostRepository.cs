@@ -31,6 +31,15 @@ public class PostRepository(
             .ToList();
     }
 
+    public IEnumerable<Post> GetByTopic(string topic)
+    {
+        return _appDbContext.Posts
+            .Include(p => p.Author)
+            .Include(p => p.Topics)
+            .Where(p => p.Topics.Any(t => t.Name == topic))
+            .ToList();
+    }
+
     public Post? GetById(Guid postId)
     {
         return _appDbContext.Posts
