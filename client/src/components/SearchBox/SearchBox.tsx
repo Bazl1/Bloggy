@@ -9,7 +9,7 @@ const SearchBox = () => {
     return (
         <div className={s.home__input_box}>
             <input onChange={(e) => setSearch(e.target.value)} value={search} className={s.home__input} type="text" placeholder='Search...' />
-            <Link to={'/posts/category/' + search} className={s.home__search_btn}><IoSearch /></Link>
+            <Link to={'/posts/search/' + search} className={s.home__search_btn}><IoSearch /></Link>
         </div>
     )
 }
