@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import menuList, { menuAuthList } from '../../assets/menuList';
 import s from './Sidebar.module.scss'
 import { observer } from "mobx-react-lite";
@@ -49,7 +49,7 @@ const Sidebar = ({ children }: any) => {
                         {posts.map((item: any) => {
                             return (
                                 <li key={item.id} className={`${s.sidebar__item} ${s.sidebar__item_category}`}>
-                                    <button className={s.sidebar__item_btn}><span><BiSolidCategory /></span>{item.name}</button>
+                                    <NavLink to={'/posts/?category=' + item.name} className={s.sidebar__item_btn}><span><BiSolidCategory /></span>{item.name}</NavLink>
                                 </li>
                             )
                         })}

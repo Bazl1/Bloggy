@@ -9,6 +9,7 @@ export default class Store {
     user = {} as IUser;
     posts = [] as IPost[]
     isAuth = false;
+    loading = false;
     redirectCallback: Function | null = null;
 
     constructor() {
@@ -25,6 +26,10 @@ export default class Store {
 
     setPost(posts: IPost[]) {
         this.posts = posts;
+    }
+
+    setLoading(loading: boolean) {
+        this.loading = loading
     }
 
     setRedirectCallback(callback: Function) {
@@ -125,8 +130,21 @@ export default class Store {
 
     async GetPosts() {
         try {
+            this.setLoading(this.loading = true)
             const response = await PostService.GetPosts()
             this.setPost(response.data.result.posts);
+            this.setLoading(this.loading = false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async GetCategoryPosts(id: string | undefined) {
+        try {
+            this.setLoading(this.loading = true)
+            const response = await PostService.SearchCategoryPosts(id)
+            this.setPost(response.data.result.posts)
+            this.setLoading(this.loading = false)
         } catch (error) {
             console.log(error)
         }

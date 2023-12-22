@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import s from './SinglePage.module.scss'
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Context } from '../../main';
 import { IPost } from '../../models/IPost';
 

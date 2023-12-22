@@ -2,11 +2,15 @@ import SearchBox from '../../components/SearchBox/SearchBox';
 import s from './HomePage.module.scss'
 import { observer } from 'mobx-react-lite';
 import Post from '../../components/Post/Post';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../../main';
 
 const HomePage = () => {
   const { store } = useContext(Context)
+
+  useEffect(() => {
+    store.GetPosts()
+  }, [])
 
   return (
     <section className={s.home}>
@@ -16,13 +20,16 @@ const HomePage = () => {
         </div>
         <div className={s.home__items}>
           {
-            Array.isArray(store.posts) && store.posts.length > 0 ?
-            store.posts.map((item) => {
-                return (
-                  <Post key={item.id} title={item.title} imageUri={item.author.imageUri} name={item.author.name} dateCreated={item.dateCreated} topics={item.topics} description={item.description} postImg={item.imageUri} postId={item.id} />
-                )
-              })
-              : ''
+            store.loading ?
+              'Loading...'
+              :
+              Array.isArray(store.posts) && store.posts.length > 0 ?
+                store.posts.map((item) => {
+                  return (
+                    <Post key={item.id} title={item.title} imageUri={item.author.imageUri} name={item.author.name} dateCreated={item.dateCreated} topics={item.topics} description={item.description} postImg={item.imageUri} postId={item.id} />
+                  )
+                })
+                : ''
           }
         </div>
       </div>

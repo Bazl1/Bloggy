@@ -12,14 +12,12 @@ import { Context } from './main';
 import AccountPage from './pages/AccountPage/AccountPage';
 import CreatePostPage from './pages/CreatePostPage/CreatePostPage';
 import SinglePage from './pages/SinglePage/SinglePage';
+import SearchPage from './pages/SearchPage/SearchPage';
 
 const App: FC = () => {
   const { store } = useContext(Context)
 
   useEffect(() => {
-
-    store.GetPosts()
-
     if (localStorage.getItem('token')) {
       store.checkAuth()
     }
@@ -33,6 +31,7 @@ const App: FC = () => {
 
         <Sidebar>
           <Routes>
+            <Route path="/posts/?category=:id" element={<SearchPage/>} />
             <Route path="/post/:id" element={<SinglePage />} />
             <Route path="/create-post" element={<CreatePostPage />} />
             <Route path="/account" element={<AccountPage />} />
