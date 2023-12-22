@@ -49,7 +49,7 @@ const Sidebar = ({ children }: any) => {
                         {posts.map((item: any) => {
                             return (
                                 <li key={item.id} className={`${s.sidebar__item} ${s.sidebar__item_category}`}>
-                                    <NavLink to={'/posts/?category=' + item.name} className={s.sidebar__item_btn}><span><BiSolidCategory /></span>{item.name}</NavLink>
+                                    <NavLink to={'/posts/category/' + item.name} className={s.sidebar__item_btn}><span><BiSolidCategory /></span>{item.name}</NavLink>
                                 </li>
                             )
                         })}
