@@ -21,8 +21,8 @@ export default class PostService {
         return $api.post<IPost>(`/posts/${id}/image`, imageUri)
     }
 
-    static async SearchCategoryPosts(id: string | undefined): Promise<AxiosResponse<PostsResponse[]>> {
-        return $api.get<PostsResponse[]>(`/posts/?category=${id}`)
+    static async SearchCategoryPosts(id: string | undefined, type: string): Promise<AxiosResponse<PostsResponse[]>> {
+        return $api.get<PostsResponse[]>(`/posts/?${type}=${id}`)
 
     }
 }

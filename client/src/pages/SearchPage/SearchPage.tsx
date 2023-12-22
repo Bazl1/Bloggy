@@ -9,13 +9,17 @@ interface Params {
     [key: string]: string | undefined;
 }
 
-const SearchPage = () => {
+interface SearchProps {
+    type: string;
+}
+
+const SearchPage = ({ type }: SearchProps) => {
     const { store } = useContext(Context)
     const { id } = useParams<Params>()
 
     useEffect(() => {
-        store.GetCategoryPosts(id)
-    }, [id])
+        store.GetSearchPosts(id, type)
+    }, [id, type])
 
     return (
         <section className={s.search}>
