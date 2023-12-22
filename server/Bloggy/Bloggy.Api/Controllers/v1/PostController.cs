@@ -19,6 +19,6 @@ public class PostController(
 
     [HttpGet]
     public IActionResult GetAll(
-        [FromQuery] int categoryId = -1
-    ) => Ok(_mediator.Send(new GetAllRequest(0,0, categoryId)));
+        [FromQuery] string category = ""
+    ) => Ok(_mediator.Send(new GetAllRequest(0, 0, category)));
 }

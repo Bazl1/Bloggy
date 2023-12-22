@@ -5,5 +5,5 @@ namespace Bloggy.Application.Commands.Posts.GetAll;
 public record GetAllRequest(
     int Page,
     int Limit,
-    int CategoryId
+    string Category
 ) : IRequest<GetAllResponse>;

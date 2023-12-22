@@ -11,9 +11,9 @@ public class GetAllHandler(
     public Task<GetAllResponse> Handle(GetAllRequest request, CancellationToken cancellationToken)
     {
         IEnumerable<PostDto> posts;
-        if (request.CategoryId != -1)
+        if (request.Category != string.Empty)
         {
-            posts = _postRepository.GetByTopicId(request.CategoryId)
+            posts = _postRepository.GetByTopic(request.Category)
                 .Select(p => new PostDto
                 {
                     Id = p.Id.ToString(),

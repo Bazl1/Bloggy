@@ -10,4 +10,5 @@ public interface IPostRepository
     Post? GetById(Guid postId);
     IEnumerable<Post> GetAll();
     IEnumerable<Post> GetByTopicId(int topicId);
+    IEnumerable<Post> GetByTopic(string topic);
 }
