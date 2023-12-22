@@ -14,6 +14,7 @@ public class GetAllHandler(
         if (request.Category != string.Empty)
         {
             posts = _postRepository.GetByTopic(request.Category)
+                .OrderByDescending(p => p.DateCreated)
                 .Select(p => new PostDto
                 {
                     Id = p.Id.ToString(),
@@ -38,6 +39,7 @@ public class GetAllHandler(
         else
         {
             posts = _postRepository.GetAll()
+                .OrderByDescending(p => p.DateCreated)
                 .Select(p => new PostDto
                 {
                     Id = p.Id.ToString(),
