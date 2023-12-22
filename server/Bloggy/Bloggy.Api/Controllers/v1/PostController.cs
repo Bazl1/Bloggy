@@ -19,6 +19,7 @@ public class PostController(
 
     [HttpGet]
     public IActionResult GetAll(
-        [FromQuery] string category = ""
-    ) => Ok(_mediator.Send(new GetAllRequest(0, 0, category)));
+        [FromQuery] string category = "",
+        [FromQuery] string search = ""
+    ) => Ok(_mediator.Send(new GetAllRequest(0, 0, category, search)));
 }

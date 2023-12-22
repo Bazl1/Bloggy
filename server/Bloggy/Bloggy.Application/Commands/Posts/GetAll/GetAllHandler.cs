@@ -11,10 +11,33 @@ public class GetAllHandler(
     public Task<GetAllResponse> Handle(GetAllRequest request, CancellationToken cancellationToken)
     {
         IEnumerable<PostDto> posts;
-        if (request.Category != string.Empty)
+        if (request.Search != string.Empty)
+        {
+            posts = _postRepository.Search(request.Search)
+                .Select(p => new PostDto
+                {
+                    Id = p.Id.ToString(),
+                    Author = new UserWithoutPasswordDto
+                    {
+                        Id = p.Author.Id.ToString(),
+                        ImageUri = p.Author.ImageUri,
+                        Name = p.Author.Name,
+                        Email = p.Author.Email,
+                    },
+                    ImageUri = p.ImageUri,
+                    Title = p.Title,
+                    Description = p.Description,
+                    DateCreated = p.DateCreated.ToString("dd/MM/yyyy HH:mm"),
+                    Topics = p.Topics.Select(t => new TopicDto
+                    {
+                        Id = t.Id,
+                        Name = t.Name
+                    })
+                });
+        }
+        else if (request.Category != string.Empty)
         {
             posts = _postRepository.GetByTopic(request.Category)
-                .OrderByDescending(p => p.DateCreated)
                 .Select(p => new PostDto
                 {
                     Id = p.Id.ToString(),
@@ -39,7 +62,6 @@ public class GetAllHandler(
         else
         {
             posts = _postRepository.GetAll()
-                .OrderByDescending(p => p.DateCreated)
                 .Select(p => new PostDto
                 {
                     Id = p.Id.ToString(),

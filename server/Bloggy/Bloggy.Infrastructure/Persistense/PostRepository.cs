@@ -19,6 +19,7 @@ public class PostRepository(
         return _appDbContext.Posts
             .Include(p => p.Author)
             .Include(p => p.Topics)
+            .OrderByDescending(p => p.DateCreated)
             .ToList();
     }
 
@@ -28,6 +29,7 @@ public class PostRepository(
             .Include(p => p.Author)
             .Include(p => p.Topics)
             .Where(p => p.Topics.Any(t => t.Id == topicId))
+            .OrderByDescending(p => p.DateCreated)
             .ToList();
     }
 
@@ -37,6 +39,7 @@ public class PostRepository(
             .Include(p => p.Author)
             .Include(p => p.Topics)
             .Where(p => p.Topics.Any(t => t.Name == topic))
+            .OrderByDescending(p => p.DateCreated)
             .ToList();
     }
 
@@ -57,5 +60,15 @@ public class PostRepository(
     public void Update(Post post)
     {
         _appDbContext.SaveChanges();
+    }
+
+    public IEnumerable<Post> Search(string searchString)
+    {
+        return _appDbContext.Posts
+            .Include(p => p.Author)
+            .Include(p => p.Topics)
+            .Where(p => p.Title.Contains(searchString) || p.Description.Contains(searchString))
+            .OrderByDescending(p => p.DateCreated)
+            .ToList();
     }
 }

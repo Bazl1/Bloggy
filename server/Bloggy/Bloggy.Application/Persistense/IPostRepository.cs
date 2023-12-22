@@ -9,6 +9,7 @@ public interface IPostRepository
     void Update(Post post);
     Post? GetById(Guid postId);
     IEnumerable<Post> GetAll();
+    IEnumerable<Post> Search(string searchString);
     IEnumerable<Post> GetByTopicId(int topicId);
     IEnumerable<Post> GetByTopic(string topic);
 }
