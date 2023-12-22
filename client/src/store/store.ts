@@ -133,7 +133,7 @@ export default class Store {
             this.setLoading(this.loading = true)
             const response = await PostService.GetPosts()
             this.setPost(response.data.result.posts);
-            this.setLoading(this.loading = false)
+            await this.setLoading(this.loading = false)
         } catch (error) {
             console.log(error)
         }
@@ -144,7 +144,7 @@ export default class Store {
             this.setLoading(this.loading = true)
             const response = await PostService.SearchCategoryPosts(id)
             this.setPost(response.data.result.posts)
-            this.setLoading(this.loading = false)
+            await this.setLoading(this.loading = false)
         } catch (error) {
             console.log(error)
         }

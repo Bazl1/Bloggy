@@ -21,7 +21,7 @@ const SearchPage = () => {
         <section className={s.search}>
             <div className="container">
                 <div className={s.search__inner}>
-                    <h2 className={s.search__title}>Search: {id}</h2>
+                    <h2 className={s.search__title}>{store.posts.length <= 0 ? "No results" : `Search: ${id}`}</h2>
                     <div className={s.search__items}>
                         {
                             store.loading ?
