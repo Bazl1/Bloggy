@@ -212,7 +212,7 @@ The Daily Beast and Better Homes and Gardens.
             {
                 AuthorId = user.Id,
                 Title = "Apple Explores A.I. Deals With News Publishers",
-                ImageUri = "http://localhost:5010/images/6.webp",
+                ImageUri = "http://localhost:5010/images/5.webp",
                 Description = """
 The company has discussed multiyear deals worth at least $50 million to train
 its generative A.I. systems on publishers’ news articles.
@@ -259,7 +259,7 @@ address your obligations, and enter new tasks—then get right back to the doing
             {
                 AuthorId = user.Id,
                 Title = "Apple Explores A.I. Deals With News Publishers",
-                ImageUri = "http://localhost:5010/images/7.webp",
+                ImageUri = "http://localhost:5010/images/3.webp",
                 Description = """
 The company has discussed multiyear deals worth at least $50 million to train
 its generative A.I. systems on publishers’ news articles.
