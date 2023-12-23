@@ -71,3 +71,11 @@
         color: #3a86ff;
     }
 }
+
+@media(max-width:990px) {
+    .login {
+        &::after {
+            display: none;
+        }
+    }
+}
