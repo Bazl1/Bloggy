@@ -36,6 +36,31 @@ public class GetAllHandler(
                     })
                 });
         }
+        else if (request.Search == "Popular")
+        {
+            posts = _postRepository.GetPopular(request.Page, request.Limit)
+                .Select(p => new PostDto
+                {
+                    Id = p.Id.ToString(),
+                    Author = new UserWithoutPasswordDto
+                    {
+                        Id = p.Author.Id.ToString(),
+                        ImageUri = p.Author.ImageUri,
+                        Name = p.Author.Name,
+                        Email = p.Author.Email,
+                    },
+                    ImageUri = p.ImageUri,
+                    Title = p.Title,
+                    Description = p.Description,
+                    DateCreated = p.DateCreated.ToString("dd/MM/yyyy HH:mm"),
+                    Views = p.Views,
+                    Topics = p.Topics.Select(t => new TopicDto
+                    {
+                        Id = t.Id,
+                        Name = t.Name
+                    })
+                });
+        }
         else if (request.Category != string.Empty)
         {
             posts = _postRepository.GetByTopic(request.Page, request.Limit, request.Category)
