@@ -32,9 +32,15 @@ To establish seamless communication with the server, the client interfaces with 
 + Run dotnet build and dotnet run to launch the application.
 
 ```shell
+// Clone repository
+git clone https://github.com/Bazl1/Bloggy.git
+cd ./bloggy
+
 // Server launch
+cd ./server/bloggy
 dotnet run --project ./Bloggy.Api/
 
 // Client launch
+cd ./client
 npm run dev
 ```
