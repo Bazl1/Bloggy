@@ -1,20 +1,33 @@
 import { useParams } from 'react-router-dom';
 import s from './SinglePage.module.scss'
-import { useContext } from 'react';
-import { Context } from '../../main';
+import { useEffect, useState } from 'react';
 import { IPost } from '../../models/IPost';
+import PostService from '../../service/PostsService';
 
 type Params = {
-  id: string
+  [key: string]: string | undefined
 }
 
 const SinglePage = () => {
-  const { store } = useContext(Context)
-
   const { id } = useParams<Params>();
-  const PostId: number = parseInt(id!);
+  const [post, setPost] = useState<IPost | null>(null);
 
-  const post: IPost | undefined = store.posts.find(item => parseInt(item.id) === PostId);
+  async function GetSinglePost(postId: string) {
+    try {
+      const response = await PostService.GetSinglePosts(postId);
+      if (response.data?.result?.posts) {
+        setPost(response.data.result.posts);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  useEffect(() => {
+    if (id) {
+      GetSinglePost(id);
+    }
+  }, [id]);
 
   return (
     <section className={s.single_post}>
