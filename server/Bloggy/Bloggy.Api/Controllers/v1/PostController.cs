@@ -1,6 +1,6 @@
-using Bloggy.Application.Commands.Accounts.GetById;
 using Bloggy.Application.Commands.Posts.Create;
 using Bloggy.Application.Commands.Posts.GetAll;
+using Bloggy.Application.Commands.Posts.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +19,9 @@ public class PostController(
 
     [HttpGet]
     public IActionResult GetAll(
+        [FromQuery] int page,
+        [FromQuery] int limit = 3,
         [FromQuery] string category = "",
         [FromQuery] string search = ""
-    ) => Ok(_mediator.Send(new GetAllRequest(0, 0, category, search)));
+    ) => Ok(_mediator.Send(new GetAllRequest(page, limit, category, search)));
 }

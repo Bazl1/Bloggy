@@ -68,8 +68,9 @@ public class PostRepository(
             .Include(p => p.Author)
             .Include(p => p.Topics)
             .Where(p => p.Title.ToUpper().Contains(searchString.ToUpper()) ||
-                    p.Description.ToUpper().Contains(searchString.ToUpper()))
-            .OrderByDescending(p => p.DateCreated)
+                        p.Description.ToUpper().Contains(searchString.ToUpper()))
+            .OrderByDescending(p => p.Title.ToUpper().Contains(searchString.ToUpper()))
+            .ThenByDescending(p => p.Description.ToUpper().Contains(searchString.ToUpper()))
             .ToList();
     }
 }
