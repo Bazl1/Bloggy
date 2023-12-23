@@ -154,7 +154,7 @@ Aliquam tempus ante ac tellus imperdiet luctus. Maecenas et suscipit erat. Morbi
             {
                 AuthorId = user.Id,
                 Title = "Slow Rollout of National Charging System Could Hinder E.V. Adoption",
-                ImageUri = "http://localhost:5010/images/2.webp",
+                ImageUri = "http://localhost:5010/images/1.jpg",
                 Description = """
 Lawmakers approved $5 billion for states to build a network of fast chargers two years ago.
 Although some states have made progress in recent weeks, most have not yet awarded contracts or started construction.
@@ -165,7 +165,7 @@ Although some states have made progress in recent weeks, most have not yet award
             {
                 AuthorId = user.Id,
                 Title = "The Best To-Do List App",
-                ImageUri = "http://localhost:5010/images/3.webp",
+                ImageUri = "http://localhost:5010/images/1.jpg",
                 Description = """
 Mastering your to-do list can seem like a Sisyphean task, but a good to-do list app should help
 you regain control over your routines and make it possible to keep chaos at bay.
@@ -180,7 +180,7 @@ address your obligations, and enter new tasks—then get right back to the doing
             {
                 AuthorId = user.Id,
                 Title = "No Oversight: Inside a Boom-Time Start-Up Fraud and Its Unraveling",
-                ImageUri = "http://localhost:5010/images/4.webp",
+                ImageUri = "http://localhost:5010/images/1.jpg",
                 Description = """
 False claims and risky trades at the Silicon Valley start-up HeadSpin were part
 of a pattern of trouble emerging at young companies that lacked controls.
@@ -191,7 +191,7 @@ of a pattern of trouble emerging at young companies that lacked controls.
             {
                 AuthorId = user.Id,
                 Title = "Apple Explores A.I. Deals With News Publishers",
-                ImageUri = "http://localhost:5010/images/5.webp",
+                ImageUri = "http://localhost:5010/images/1.jpg",
                 Description = """
 The company has discussed multiyear deals worth at least $50 million to train
 its generative A.I. systems on publishers’ news articles.
