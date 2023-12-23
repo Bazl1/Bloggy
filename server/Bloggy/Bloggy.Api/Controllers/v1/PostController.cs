@@ -1,7 +1,6 @@
 using Bloggy.Application.Commands.Posts.Create;
 using Bloggy.Application.Commands.Posts.GetAll;
 using Bloggy.Application.Commands.Posts.GetById;
-using Bloggy.Application.Commands.Posts.GetPopular;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
