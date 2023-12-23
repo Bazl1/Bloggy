@@ -8,5 +8,6 @@ public class PostDto
     public string Title { get; set; }
     public string Description { get; set; }
     public string DateCreated { get; set; }
+    public int Views { get; set; }
     public IEnumerable<TopicDto> Topics { get; set; }
 }
