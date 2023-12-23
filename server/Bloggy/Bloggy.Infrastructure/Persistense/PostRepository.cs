@@ -19,8 +19,7 @@ public class PostRepository(
         return _appDbContext.Posts
             .Include(p => p.Author)
             .Include(p => p.Topics)
-            .OrderByDescending(p => p.Views)
-            .ThenByDescending(p => p.DateCreated)
+            .OrderByDescending(p => p.DateCreated)
             .Skip(page * limit)
             .Take(limit)
             .ToList();
@@ -79,6 +78,18 @@ public class PostRepository(
             .OrderByDescending(p => p.Title.ToUpper().Contains(searchString.ToUpper()))
             .ThenByDescending(p => p.DateCreated)
             .ThenByDescending(p => p.Description.ToUpper().Contains(searchString.ToUpper()))
+            .ThenByDescending(p => p.DateCreated)
+            .Skip(page * limit)
+            .Take(limit)
+            .ToList();
+    }
+
+    public IEnumerable<Post> GetPopular(int page, int limit)
+    {
+        return _appDbContext.Posts
+            .Include(p => p.Author)
+            .Include(p => p.Topics)
+            .OrderByDescending(p => p.Views)
             .ThenByDescending(p => p.DateCreated)
             .Skip(page * limit)
             .Take(limit)
