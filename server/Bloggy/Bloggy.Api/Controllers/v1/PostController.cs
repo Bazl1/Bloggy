@@ -25,10 +25,4 @@ public class PostController(
         [FromQuery] string category = "",
         [FromQuery] string search = ""
     ) => Ok(_mediator.Send(new GetAllRequest(page, limit, category, search)));
-
-    [HttpGet("search/popular")]
-    public IActionResult GetPopular(
-        [FromQuery] int page,
-        [FromQuery] int limit = 3
-    ) => Ok(_mediator.Send(new GetPopularRequest(page, limit)));
 }
