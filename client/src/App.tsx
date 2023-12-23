@@ -32,6 +32,7 @@ const App: FC = () => {
         <Sidebar>
           <Routes>
             <Route path="/posts/search/:id" element={<SearchPage type={'search'} />} />
+            <Route path="/posts/search/:id" element={<SearchPage type={'search'} />} />
             <Route path="/posts/category/:id" element={<SearchPage type={'category'} />} />
             <Route path="/post/:id" element={<SinglePage />} />
             <Route path="/create-post" element={<CreatePostPage />} />

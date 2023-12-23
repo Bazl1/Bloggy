@@ -1,6 +1,7 @@
 import { ReactElement } from "react";
 import { MdHome } from "react-icons/md";
 import { MdAccountCircle } from "react-icons/md";
+import { MdLocalFireDepartment } from "react-icons/md";
 
 interface IListItem {
     path: string,
@@ -18,6 +19,11 @@ const menuList: MenuList = {
             path: '/',
             name: 'Home',
             icon: <MdHome />
+        },
+        {
+            path: '/posts/search/popular',
+            name: 'Popular',
+            icon: <MdLocalFireDepartment />
         }
     ]
 };

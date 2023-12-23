@@ -10,6 +10,7 @@ export default class Store {
     posts = [] as IPost[]
     isAuth = false;
     loading = false;
+    end = false;
     redirectCallback: Function | null = null;
 
     constructor() {
@@ -26,6 +27,10 @@ export default class Store {
 
     setPost(posts: IPost[]) {
         this.posts = posts;
+    }
+
+    setEndPosts(end: boolean) {
+        this.end = end
     }
 
     setLoading(loading: boolean) {
@@ -128,6 +133,15 @@ export default class Store {
         }
     }
 
+
+    CheckLastReq(posts: any[]) {
+        if (posts.length == 0 || posts.length % 3 !== 0) {
+            this.setEndPosts(true)
+        } else {
+            this.setEndPosts(false)
+        }
+    }
+
     async GetPosts(number: number) {
         try {
             this.setLoading(this.loading = true)
@@ -135,6 +149,7 @@ export default class Store {
             const newPosts = [...this.posts, ...response.data.result.posts]
             this.setPost(newPosts);
             this.setLoading(this.loading = false)
+            this.CheckLastReq(response.data.result.posts)
         } catch (error) {
             console.log(error)
         }
@@ -147,6 +162,7 @@ export default class Store {
             const newPosts = [...this.posts, ...response.data.result.posts]
             this.setPost(newPosts);
             this.setLoading(this.loading = false)
+            this.CheckLastReq(response.data.result.posts)
         } catch (error) {
             console.log(error)
         }

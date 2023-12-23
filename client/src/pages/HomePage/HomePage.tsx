@@ -11,7 +11,7 @@ const HomePage = () => {
   const [page, setPage] = useState<number>(0)
 
   const [ref, inView] = useInView({
-    threshold: 0.3,
+    threshold: 0.6,
     triggerOnce: true,
   })
 
@@ -45,10 +45,7 @@ const HomePage = () => {
               })
               : ''
           }
-          {store.loading ?
-            'Loading...'
-            : ''}
-          {store.loading ? '' : <div ref={ref} className={s.home__loading}></div>}
+          {store.end ? '' : store.loading ? '' : <div ref={ref} className={s.home__loading}></div>}
         </div>
       </div>
     </section>
