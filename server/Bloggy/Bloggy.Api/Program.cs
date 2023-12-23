@@ -108,7 +108,7 @@ var app = builder.Build();
             {
                 AuthorId = user.Id,
                 Title = "Lorem Ipsum",
-                ImageUri = "http://localhost:5010/images/lorem-ipsum.jpg",
+                ImageUri = "http://localhost:5010/images/1.jpg",
                 Description = """
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam metus nibh, volutpat id tellus non, imperdiet vehicula sapien.
 Vivamus venenatis cursus mi, vitae tincidunt sapien tempus vitae. Donec pellentesque efficitur ex quis posuere.
