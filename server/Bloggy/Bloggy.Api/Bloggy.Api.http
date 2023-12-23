@@ -95,7 +95,11 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGY3NGI0N
 }
 
 ### Get all posts
-GET {{Bloggy_Api_HostAddress}}/api/v1/posts/?page=1
+GET {{Bloggy_Api_HostAddress}}/api/v1/posts/?page=0&search=Popular
+Accept: : application/json
+
+### Get all posts
+GET {{Bloggy_Api_HostAddress}}/api/v1/posts/f2c04ac6-8b37-4c2b-a7da-e5eeddb3e68c
 Accept: : application/json
 
 ### Upload post image
