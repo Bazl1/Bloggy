@@ -86,3 +86,26 @@
         }
     }
 }
+
+@media(max-width:1630px) {
+    .postform {
+        &__inner{
+            padding-bottom: 120px;
+        }
+        &__title{
+            justify-content: center;
+        }
+        &__row {
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+        }
+        &__columns {
+            &:nth-child(1){
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    }
+}

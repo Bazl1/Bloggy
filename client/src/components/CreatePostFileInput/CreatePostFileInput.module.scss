@@ -80,3 +80,22 @@
         border-radius: 3px;
     }
 }
+
+@media(max-width: 1630px) {
+    .postform {
+        &__input_file {
+            flex-direction: column;
+        }
+    }
+}
+
+@media(max-width: 990px) {
+    .postform {
+        &__null {
+            max-width: 410px;
+            width: 100%;
+        }
+        
+    }
+
+}

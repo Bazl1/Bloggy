@@ -75,3 +75,11 @@
         color: #fff;
     }
 }
+
+@media(max-width:990px) {
+    .postform {
+        &__popup {
+            overflow-y: scroll;
+        }
+    }
+}

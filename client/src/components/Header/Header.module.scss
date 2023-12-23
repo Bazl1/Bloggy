@@ -53,4 +53,46 @@
             color: #fff;
         }
     }
+
+    &__pc_hidden {
+        display: none;
+    }
+}
+
+@media(max-width:990px) {
+    .header {
+        &__inner{
+            gap: 20px;
+        }
+        &__mb_hidden {
+            display: none;
+        }
+
+        &__pc_hidden {
+            display: block;
+        }
+
+        &__burger {
+            display: block;
+            outline: none;
+            border: none;
+            background: transparent;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+
+            svg {
+                color: #fff;
+                width: 24px;
+                height: 24px;
+            }
+        }
+
+        &__auth_btn {
+            margin-left: auto;
+        }
+    }
 }

@@ -129,3 +129,15 @@
         }
     }
 }
+
+@media(max-width:990px) {
+    .home {
+        &__item_title {
+            font-size: 21px;
+        }
+
+        &__item_img {
+            max-height: 260px;
+        }
+    }
+}

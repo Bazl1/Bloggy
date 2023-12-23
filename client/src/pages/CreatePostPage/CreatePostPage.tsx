@@ -34,19 +34,25 @@ const CreatePostPage = () => {
             <SnackbarProvider autoHideDuration={3000} />
             <section className={s.postform}>
                 <div className="container">
-                    <div className={s.postform__inner}>
-                        <h2 className={s.postform__title}><span><IoCreate /></span>Create a post</h2>
-                        <div className={s.postform__row}>
-                            <div className={s.postform__columns}>
-                                <CreatePostFileInput imgUrl={imgUrl} setImgUrl={setImgUrl} />
+                    {store.isAuth ?
+                        <div className={s.postform__inner}>
+                            <h2 className={s.postform__title}><span><IoCreate /></span>Create a post</h2>
+                            <div className={s.postform__row}>
+                                <div className={s.postform__columns}>
+                                    <CreatePostFileInput imgUrl={imgUrl} setImgUrl={setImgUrl} />
+                                </div>
+                                <div className={s.postform__columns}>
+                                    <CreatePostForm postTitle={postTitle} setPostTitle={setPostTitle} postDescr={postDescr} setPostDescr={setPostDescr} Submit={Submit} />
+                                    <button onClick={() => setOpen(current => !current)} className={s.postform__category_all}>Select post category</button>
+                                </div>
                             </div>
-                            <div className={s.postform__columns}>
-                                <CreatePostForm postTitle={postTitle} setPostTitle={setPostTitle} postDescr={postDescr} setPostDescr={setPostDescr} Submit={Submit} />
-                                <button onClick={() => setOpen(current => !current)} className={s.postform__category_all}>Select post category</button>
-                            </div>
+                            <CreatePostSelectCategorys selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} open={open} setOpen={setOpen} />
                         </div>
-                        <CreatePostSelectCategorys selectedCategories={selectedCategories} setSelectedCategories={setSelectedCategories} open={open} setOpen={setOpen} />
-                    </div>
+                        :
+                        <div className={s.postform__inner}>
+                            Log in...
+                        </div>
+                    }
                 </div>
             </section>
         </>

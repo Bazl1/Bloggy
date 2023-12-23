@@ -11,6 +11,7 @@ export default class Store {
     isAuth = false;
     loading = false;
     end = false;
+    active= false;
     redirectCallback: Function | null = null;
 
     constructor() {
@@ -35,6 +36,10 @@ export default class Store {
 
     setLoading(loading: boolean) {
         this.loading = loading
+    }
+
+    setActiveSidebar(active: boolean){
+        this.active = active
     }
 
     setRedirectCallback(callback: Function) {

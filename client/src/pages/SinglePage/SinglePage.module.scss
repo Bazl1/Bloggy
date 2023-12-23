@@ -50,3 +50,13 @@
         word-break: break-all;
     }
 }
+@media(max-width:990px){
+    .single_post {
+        &__img{
+            max-height: 300px;
+        }
+        &__title{
+            font-size: 26px;
+        }
+    }
+}

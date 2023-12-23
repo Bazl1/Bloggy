@@ -30,3 +30,20 @@
         margin-bottom: 20px;
     }
 }
+
+@media(max-width:1420px) {
+    .account {
+        padding-bottom: 80px;
+
+        &__box {
+            flex-direction: column;
+        }
+    }
+}
+@media(max-width:990px){
+    .account {
+        &__title{
+            font-size: 24px;
+        }
+    }
+}
