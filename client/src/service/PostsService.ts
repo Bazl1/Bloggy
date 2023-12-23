@@ -13,6 +13,10 @@ export default class PostService {
         return $api.get<PostsResponse[]>('/posts')
     }
 
+    static async GetSinglePosts(postId: string): Promise<AxiosResponse<PostsResponse[]>> {
+        return $api.get<PostsResponse[]>(`/posts/${postId}`)
+    }
+
     static async CreatePost(title: string, description: string, topics: number[]): Promise<AxiosResponse<IPost>> {
         return $api.post<IPost>('/posts', { title, description, topics })
     }
