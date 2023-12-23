@@ -132,19 +132,29 @@ export default class Store {
         try {
             this.setLoading(this.loading = true)
             const response = await PostService.GetPosts(number)
-            this.setPost([...this.posts ,response.data.result.posts]);
+            const newPosts = [...this.posts, ...response.data.result.posts]
+            this.setPost(newPosts);
             this.setLoading(this.loading = false)
         } catch (error) {
             console.log(error)
         }
     }
 
-    async GetSearchPosts(id: string | undefined, type: string) {
+    async GetSearchPosts(id: string | undefined, type: string, number: number) {
         try {
             this.setLoading(this.loading = true)
-            const response = await PostService.SearchCategoryPosts(id, type)
-            this.setPost(response.data.result.posts)
+            const response = await PostService.SearchCategoryPosts(id, type, number)
+            const newPosts = [...this.posts, ...response.data.result.posts]
+            this.setPost(newPosts);
             this.setLoading(this.loading = false)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    async ClearPosts() {
+        try {
+            this.setPost([])
         } catch (error) {
             console.log(error)
         }

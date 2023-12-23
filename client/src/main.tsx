@@ -15,9 +15,7 @@ export const Context = createContext<State>({
 })
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
     <Context.Provider value={{ store }}>
       <App />
-    </Context.Provider>
-  </React.StrictMode>,
+    </Context.Provider>,
 )

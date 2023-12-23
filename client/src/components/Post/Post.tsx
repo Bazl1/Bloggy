@@ -37,7 +37,7 @@ const Post: React.FC<PostProps> = ({ title, imageUri, name, dateCreated, topics,
                 : ''}
             <div className={s.home__item_data_categorys}>
                 {topics.map(topic => {
-                    return <div className={s.home__item_data_category}>{topic.name}</div>
+                    return <div key={topic.id} className={s.home__item_data_category}>{topic.name}</div>
                 })}
             </div>
             <p className={s.home__item_text}>{description}</p>

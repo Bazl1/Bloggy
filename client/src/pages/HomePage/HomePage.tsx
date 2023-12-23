@@ -9,28 +9,25 @@ import { useInView } from 'react-intersection-observer'
 const HomePage = () => {
   const { store } = useContext(Context)
   const [page, setPage] = useState<number>(0)
-  let trigger = false;
 
   const [ref, inView] = useInView({
     threshold: 0.3,
-    triggerOnce: trigger
+    triggerOnce: true,
   })
 
   useEffect(() => {
-    store.GetPosts(page)
+    store.ClearPosts()
   }, [])
 
   useEffect(() => {
-    let temp = store.posts.length
     if (inView) {
-      setPage(current => current + 1)
-      store.GetPosts(page)
-      if (temp === store.posts.length && store.posts.length % 3 === 0){
-        trigger = true
-        console.log('Наблюдатель выключен')
-      }
+      setPage((current: number) => current + 1)
     }
   }, [inView])
+
+  useEffect(() => {
+    store.GetPosts(page)
+  }, [page])
 
   return (
     <section className={s.home}>
