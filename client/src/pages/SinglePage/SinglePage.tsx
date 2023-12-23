@@ -15,9 +15,7 @@ const SinglePage = () => {
   async function GetSinglePost(postId: string) {
     try {
       const response = await PostService.GetSinglePosts(postId);
-      if (response.data?.result?.posts) {
-        setPost(response.data.result.posts);
-      }
+      setPost(response.data.result.post);
     } catch (error) {
       console.error(error);
     }
