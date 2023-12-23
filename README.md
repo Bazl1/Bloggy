@@ -1,9 +1,9 @@
 # Bloggy - A React and ASP.NET Core Web API Blog Application
 Bloggy is a dynamic web application designed to empower users to engage in the world of blogging seamlessly. Leveraging the robust combination of React for the frontend and ASP.NET Core Web API for the backend, Bloggy offers a modern and user-friendly blogging experience. Start sharing your stories today!
 
-![Текст, который отобразится при недоступности изображения](./assets/images/1.png)
+![Текст, который отобразится при недоступности изображения](./assets/images/image_1.png)
 
-![Текст, который отобразится при недоступности изображения](./assets/images/2.png)
+![Текст, который отобразится при недоступности изображения](./assets/images/image_2.png)
 
 ## Key Features
 + Mobile-Optimized Interface: Bloggy Mobile boasts a sleek and intuitive interface optimized for various screen sizes, ensuring a delightful and seamless user experience on cell phones.
