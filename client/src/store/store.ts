@@ -128,11 +128,11 @@ export default class Store {
         }
     }
 
-    async GetPosts() {
+    async GetPosts(number: number) {
         try {
             this.setLoading(this.loading = true)
-            const response = await PostService.GetPosts()
-            this.setPost(response.data.result.posts);
+            const response = await PostService.GetPosts(number)
+            this.setPost([...this.posts ,response.data.result.posts]);
             this.setLoading(this.loading = false)
         } catch (error) {
             console.log(error)

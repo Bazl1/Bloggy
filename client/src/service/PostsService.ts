@@ -9,8 +9,8 @@ export default class PostService {
         return $api.get<CategoryResponse[]>('/topics')
     }
 
-    static async GetPosts(): Promise<AxiosResponse<PostsResponse[]>> {
-        return $api.get<PostsResponse[]>('/posts')
+    static async GetPosts(number: number = 0): Promise<AxiosResponse<PostsResponse[]>> {
+        return $api.get<PostsResponse[]>(`/posts/?page=${number}`)
     }
 
     static async GetSinglePosts(postId: string): Promise<AxiosResponse<PostsResponse[]>> {

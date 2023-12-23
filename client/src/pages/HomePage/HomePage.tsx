@@ -2,15 +2,35 @@ import SearchBox from '../../components/SearchBox/SearchBox';
 import s from './HomePage.module.scss'
 import { observer } from 'mobx-react-lite';
 import Post from '../../components/Post/Post';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Context } from '../../main';
+import { useInView } from 'react-intersection-observer'
 
 const HomePage = () => {
   const { store } = useContext(Context)
+  const [page, setPage] = useState<number>(0)
+  let trigger = false;
+
+  const [ref, inView] = useInView({
+    threshold: 0.3,
+    triggerOnce: trigger
+  })
 
   useEffect(() => {
-    store.GetPosts()
+    store.GetPosts(page)
   }, [])
+
+  useEffect(() => {
+    let temp = store.posts.length
+    if (inView) {
+      setPage(current => current + 1)
+      store.GetPosts(page)
+      if (temp === store.posts.length && store.posts.length % 3 === 0){
+        trigger = true
+        console.log('Наблюдатель выключен')
+      }
+    }
+  }, [inView])
 
   return (
     <section className={s.home}>
@@ -20,17 +40,18 @@ const HomePage = () => {
         </div>
         <div className={s.home__items}>
           {
-            store.loading ?
-              'Loading...'
-              :
-              Array.isArray(store.posts) && store.posts.length > 0 ?
-                store.posts.map((item) => {
-                  return (
-                    <Post key={item.id} title={item.title} imageUri={item.author.imageUri} name={item.author.name} dateCreated={item.dateCreated} topics={item.topics} description={item.description} postImg={item.imageUri} postId={item.id} />
-                  )
-                })
-                : ''
+            Array.isArray(store.posts) && store.posts.length > 0 ?
+              store.posts.map((item) => {
+                return (
+                  <Post key={item.id} title={item.title} imageUri={item.author.imageUri} name={item.author.name} dateCreated={item.dateCreated} topics={item.topics} description={item.description} postImg={item.imageUri} postId={item.id} />
+                )
+              })
+              : ''
           }
+          {store.loading ?
+            'Loading...'
+            : ''}
+          {store.loading ? '' : <div ref={ref} className={s.home__loading}></div>}
         </div>
       </div>
     </section>
