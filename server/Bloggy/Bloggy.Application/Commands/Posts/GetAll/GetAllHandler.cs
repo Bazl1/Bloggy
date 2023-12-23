@@ -28,6 +28,7 @@ public class GetAllHandler(
                     Title = p.Title,
                     Description = p.Description,
                     DateCreated = p.DateCreated.ToString("dd/MM/yyyy HH:mm"),
+                    Views = p.Views,
                     Topics = p.Topics.Select(t => new TopicDto
                     {
                         Id = t.Id,
@@ -52,6 +53,7 @@ public class GetAllHandler(
                     Title = p.Title,
                     Description = p.Description,
                     DateCreated = p.DateCreated.ToString("dd/MM/yyyy HH:mm"),
+                    Views = p.Views,
                     Topics = p.Topics.Select(t => new TopicDto
                     {
                         Id = t.Id,
@@ -76,6 +78,7 @@ public class GetAllHandler(
                     Title = p.Title,
                     Description = p.Description,
                     DateCreated = p.DateCreated.ToString("dd/MM/yyyy HH:mm"),
+                    Views = p.Views,
                     Topics = p.Topics.Select(t => new TopicDto
                     {
                         Id = t.Id,

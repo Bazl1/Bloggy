@@ -19,7 +19,8 @@ public class PostRepository(
         return _appDbContext.Posts
             .Include(p => p.Author)
             .Include(p => p.Topics)
-            .OrderByDescending(p => p.DateCreated)
+            .OrderByDescending(p => p.Views)
+            .ThenByDescending(p => p.DateCreated)
             .Skip(page * limit)
             .Take(limit)
             .ToList();
@@ -76,7 +77,9 @@ public class PostRepository(
             .Where(p => p.Title.ToUpper().Contains(searchString.ToUpper()) ||
                         p.Description.ToUpper().Contains(searchString.ToUpper()))
             .OrderByDescending(p => p.Title.ToUpper().Contains(searchString.ToUpper()))
+            .ThenByDescending(p => p.DateCreated)
             .ThenByDescending(p => p.Description.ToUpper().Contains(searchString.ToUpper()))
+            .ThenByDescending(p => p.DateCreated)
             .Skip(page * limit)
             .Take(limit)
             .ToList();

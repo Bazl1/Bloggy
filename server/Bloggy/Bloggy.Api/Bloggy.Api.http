@@ -86,16 +86,16 @@ Accept: application/json
 POST {{Bloggy_Api_HostAddress}}/api/v1/posts/
 Accept: : application/json
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1ZjI3ZTViNC1jOTEwLTQwZGMtYTdmYS0xMTA5MTc1ZDFiMDIiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiOTk3NmViN2QtNDk5Zi00ZWRlLThhNjAtMWEyYmJiNzAxZWZkIiwiZXhwIjoxNzAzMzMyNTMwLCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.0I6L1FNV1pd5FwWZEwQhSbQtN3RAmv-dwpz5iW_qXWg
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxNGY3NGI0Ny1mNjQzLTQ3ZDEtYTA2Yy1mNjQ4ZTFiYzU3MjEiLCJuYW1lIjoiQ3lyaWwiLCJlbWFpbCI6ImN5cmlsQG1haWwuY29tIiwianRpIjoiMGM0MGQzNTYtYmY3Yy00ODJjLTg3MGYtZmJkYzM4MjQ1YTEwIiwiZXhwIjoxNzAzMzMzNjU2LCJpc3MiOiJCbG9nZ3kuY29tIiwiYXVkIjoiQmxvZ2d5LmNvbSJ9.SrkeXN2PnutzQTynlBUHO2FKPF9_zyE2mjUICNXzhY0
 
 {
     "title": "world123",
-    "description": "world",
+    "description": "worldasdasdasddsasdadsasd",
     "topics": [1,2,3]
 }
 
 ### Get all posts
-GET {{Bloggy_Api_HostAddress}}/api/v1/posts/?page=7
+GET {{Bloggy_Api_HostAddress}}/api/v1/posts/?page=1
 Accept: : application/json
 
 ### Upload post image

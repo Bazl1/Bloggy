@@ -58,6 +58,7 @@ public class UploadHandler(
                     Title = post.Title,
                     Description = post.Description,
                     DateCreated = post.DateCreated.ToString("dd/MM/yyyy HH:mm"),
+                    Views = post.Views,
                     Topics = post.Topics.Select(t => new TopicDto
                     {
                         Id = t.Id,

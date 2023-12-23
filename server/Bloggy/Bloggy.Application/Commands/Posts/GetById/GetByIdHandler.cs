@@ -17,6 +17,9 @@ public class GetByIdHandler(
             throw new ApplicationException("Post with given id not found");
         }
 
+        post.Views++;
+        _postRepository.Update(post);
+
         return Task.FromResult(
             new GetByIdResponse(
                 Post: new PostDto
@@ -33,6 +36,7 @@ public class GetByIdHandler(
                     Title = post.Title,
                     Description = post.Description,
                     DateCreated = post.DateCreated.ToString("dd/MM/yyyy HH:mm"),
+                    Views = post.Views,
                     Topics = post.Topics.Select(t => new TopicDto
                     {
                         Id = t.Id,

@@ -9,5 +9,6 @@ public class Post
     public string Title { get; set; }
     public string Description { get; set; }
     public DateTime DateCreated { get; set; }
+    public int Views { get; set; } = 0;
     public IEnumerable<Topic> Topics { get; set; } = new List<Topic>();
 }
