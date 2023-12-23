@@ -21,13 +21,13 @@ const SearchPage = ({ type }: SearchProps) => {
     const [page, setPage] = useState<number>(0)
 
     const [ref, inView] = useInView({
-        threshold: 0.3,
+        threshold: 0.6,
         triggerOnce: true,
     })
 
     useEffect(() => {
         store.ClearPosts()
-    }, [])
+    }, [id])
 
     useEffect(() => {
         if (inView) {
@@ -54,10 +54,7 @@ const SearchPage = ({ type }: SearchProps) => {
                                 })
                                 : ''
                         }
-                        {store.loading ?
-                            'Loading...'
-                            : ''}
-                        {store.loading ? '' : <div ref={ref} className={s.search__loading}></div>}
+                        {store.end ? '' : store.loading ? '' : <div ref={ref} className={s.search__loading}></div>}
                     </div>
                 </div>
             </div>
