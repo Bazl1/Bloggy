@@ -14,32 +14,38 @@ public class PostRepository(
         _appDbContext.SaveChanges();
     }
 
-    public IEnumerable<Post> GetAll()
+    public IEnumerable<Post> GetAll(int page, int limit)
     {
         return _appDbContext.Posts
             .Include(p => p.Author)
             .Include(p => p.Topics)
             .OrderByDescending(p => p.DateCreated)
+            .Skip(page * limit)
+            .Take(limit)
             .ToList();
     }
 
-    public IEnumerable<Post> GetByTopicId(int topicId)
+    public IEnumerable<Post> GetByTopicId(int page, int limit, int topicId)
     {
         return _appDbContext.Posts
             .Include(p => p.Author)
             .Include(p => p.Topics)
             .Where(p => p.Topics.Any(t => t.Id == topicId))
             .OrderByDescending(p => p.DateCreated)
+            .Skip(page * limit)
+            .Take(limit)
             .ToList();
     }
 
-    public IEnumerable<Post> GetByTopic(string topic)
+    public IEnumerable<Post> GetByTopic(int page, int limit, string topic)
     {
         return _appDbContext.Posts
             .Include(p => p.Author)
             .Include(p => p.Topics)
             .Where(p => p.Topics.Any(t => t.Name == topic))
             .OrderByDescending(p => p.DateCreated)
+            .Skip(page * limit)
+            .Take(limit)
             .ToList();
     }
 
@@ -62,7 +68,7 @@ public class PostRepository(
         _appDbContext.SaveChanges();
     }
 
-    public IEnumerable<Post> Search(string searchString)
+    public IEnumerable<Post> Search(int page, int limit, string searchString)
     {
         return _appDbContext.Posts
             .Include(p => p.Author)
@@ -71,6 +77,8 @@ public class PostRepository(
                         p.Description.ToUpper().Contains(searchString.ToUpper()))
             .OrderByDescending(p => p.Title.ToUpper().Contains(searchString.ToUpper()))
             .ThenByDescending(p => p.Description.ToUpper().Contains(searchString.ToUpper()))
+            .Skip(page * limit)
+            .Take(limit)
             .ToList();
     }
 }

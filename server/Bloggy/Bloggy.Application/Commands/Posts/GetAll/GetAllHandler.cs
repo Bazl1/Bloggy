@@ -13,7 +13,7 @@ public class GetAllHandler(
         IEnumerable<PostDto> posts;
         if (request.Search != string.Empty)
         {
-            posts = _postRepository.Search(request.Search)
+            posts = _postRepository.Search(request.Page, request.Limit, request.Search)
                 .Select(p => new PostDto
                 {
                     Id = p.Id.ToString(),
@@ -37,7 +37,7 @@ public class GetAllHandler(
         }
         else if (request.Category != string.Empty)
         {
-            posts = _postRepository.GetByTopic(request.Category)
+            posts = _postRepository.GetByTopic(request.Page, request.Limit, request.Category)
                 .Select(p => new PostDto
                 {
                     Id = p.Id.ToString(),
@@ -61,7 +61,7 @@ public class GetAllHandler(
         }
         else
         {
-            posts = _postRepository.GetAll()
+            posts = _postRepository.GetAll(request.Page, request.Limit)
                 .Select(p => new PostDto
                 {
                     Id = p.Id.ToString(),
