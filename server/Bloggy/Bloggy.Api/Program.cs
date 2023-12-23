@@ -207,6 +207,74 @@ publisher of Vogue and The New Yorker; NBC News; and IAC, which owns People,
 The Daily Beast and Better Homes and Gardens.
 """,
                 Topics = appDbContext.Topics.Where(t => t.Id == 25).ToList()
+            },
+            new Post
+            {
+                AuthorId = user.Id,
+                Title = "Apple Explores A.I. Deals With News Publishers",
+                ImageUri = "http://localhost:5010/images/6.webp",
+                Description = """
+The company has discussed multiyear deals worth at least $50 million to train
+its generative A.I. systems on publishers’ news articles.
+
+Apple has opened negotiations in recent weeks with major news and publishing organizations,
+seeking permission to use their material in the company’s development of generative artificial
+intelligence systems, according to four people familiar with the discussions.
+
+The technology giant has floated multiyear deals worth at least $50 million to license the archives
+of news articles, said the people with knowledge of talks, who spoke on the condition of anonymity
+to discuss sensitive negotiations. The news organizations contacted by Apple include Condé Nast,
+publisher of Vogue and The New Yorker; NBC News; and IAC, which owns People,
+The Daily Beast and Better Homes and Gardens.
+""",
+                Topics = appDbContext.Topics.Where(t => t.Id == 25).ToList()
+            },
+            new Post
+            {
+                AuthorId = user.Id,
+                Title = "Slow Rollout of National Charging System Could Hinder E.V. Adoption",
+                ImageUri = "http://localhost:5010/images/2.webp",
+                Description = """
+Lawmakers approved $5 billion for states to build a network of fast chargers two years ago.
+Although some states have made progress in recent weeks, most have not yet awarded contracts or started construction.
+""",
+                Topics = appDbContext.Topics.Where(t => t.Id == 25).ToList()
+            },
+            new Post
+            {
+                AuthorId = user.Id,
+                Title = "The Best To-Do List App",
+                ImageUri = "http://localhost:5010/images/3.webp",
+                Description = """
+Mastering your to-do list can seem like a Sisyphean task, but a good to-do list app should help
+you regain control over your routines and make it possible to keep chaos at bay.
+
+Our to-do list app picks, Todoist, TickTick, and the Apple-exclusive Things 3, are a breeze to use,
+have thoughtful designs, and feature flexible organization schemes, so you can conveniently hop in,
+address your obligations, and enter new tasks—then get right back to the doing.
+""",
+                Topics = appDbContext.Topics.Where(t => t.Id == 25).ToList()
+            },
+            new Post
+            {
+                AuthorId = user.Id,
+                Title = "Apple Explores A.I. Deals With News Publishers",
+                ImageUri = "http://localhost:5010/images/7.webp",
+                Description = """
+The company has discussed multiyear deals worth at least $50 million to train
+its generative A.I. systems on publishers’ news articles.
+
+Apple has opened negotiations in recent weeks with major news and publishing organizations,
+seeking permission to use their material in the company’s development of generative artificial
+intelligence systems, according to four people familiar with the discussions.
+
+The technology giant has floated multiyear deals worth at least $50 million to license the archives
+of news articles, said the people with knowledge of talks, who spoke on the condition of anonymity
+to discuss sensitive negotiations. The news organizations contacted by Apple include Condé Nast,
+publisher of Vogue and The New Yorker; NBC News; and IAC, which owns People,
+The Daily Beast and Better Homes and Gardens.
+""",
+                Topics = appDbContext.Topics.Where(t => t.Id == 25).ToList()
             }
         );
         appDbContext.SaveChanges();
