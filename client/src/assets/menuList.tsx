@@ -21,7 +21,7 @@ const menuList: MenuList = {
             icon: <MdHome />
         },
         {
-            path: '/posts/search/popular',
+            path: '/posts/search/Popular',
             name: 'Popular',
             icon: <MdLocalFireDepartment />
         }
